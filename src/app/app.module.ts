@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SolarisButtonComponent } from './components/solaris-button/solaris-button.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SolarisButtonComponent
   ],
   imports: [
     BrowserModule,
