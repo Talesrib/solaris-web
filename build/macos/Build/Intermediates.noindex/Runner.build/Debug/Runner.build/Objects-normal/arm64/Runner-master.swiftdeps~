@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "fd6377b717a5b616c5edebff22d15f00dea5fc2bb8b01fb183b9e63cd8f83379"
+build_start_time: [1670907029, 512755870]
+build_end_time: [1670907029, 630138874]
+inputs:
+  "/Users/ronaldoolenhador/solaris-web-flutter/sollaris_web_flutter/macos/Flutter/GeneratedPluginRegistrant.swift": !private [1670906984, 710497140]
+  "/Users/ronaldoolenhador/solaris-web-flutter/sollaris_web_flutter/macos/Runner/AppDelegate.swift": !private [1660660048, 469646930]
+  "/Users/ronaldoolenhador/solaris-web-flutter/sollaris_web_flutter/macos/Runner/MainFlutterWindow.swift": !private [1660660048, 471235275]
