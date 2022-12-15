@@ -25,13 +25,13 @@ class SollarisForm extends StatelessWidget {
               mandatory
                   ? Padding(
                       padding: const EdgeInsets.only(right: 4),
-                      child: const Text('*').main(SollarisColors.error100),
+                      child: const Text('*').mainBold(SollarisColors.error100),
                     )
                   : const SizedBox(),
               Text(
                 title,
                 overflow: TextOverflow.ellipsis,
-              ).main(SollarisColors.neutral300),
+              ).mainBold(SollarisColors.neutral300),
             ],
           ),
           Padding(

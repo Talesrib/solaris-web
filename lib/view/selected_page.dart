@@ -17,6 +17,8 @@ class SelectedPage extends StatelessWidget {
             return const BudgetListPage();
           case 'new_budget_page':
             return const NewBudgetPage();
+          case 'selected_budget_page':
+            return const SelectedBudgetPage();
           case 'client_list_page':
             return const ClientListPage();
           case 'my_profile_page':

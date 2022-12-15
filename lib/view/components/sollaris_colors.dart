@@ -13,7 +13,7 @@ class SollarisColors {
 
   static const Color link100 = Color.fromARGB(255, 9, 124, 196);
 
-  static const Color success100 = Color.fromARGB(255, 201, 58, 58);
+  static const Color success100 = Color.fromARGB(255, 104, 201, 58);
 
   static const Color error100 = Color.fromARGB(255, 201, 58, 58);
 }

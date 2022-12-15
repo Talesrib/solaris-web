@@ -34,12 +34,8 @@ class SollarisLateralMenu extends StatelessWidget {
     return Center(
       child: Container(
         width: 10.w,
-        height: 10.w,
-        margin: const EdgeInsets.only(bottom: 100),
-        child: const Image(
-          image: AssetImage('assets/logo.svg'),
-          fit: BoxFit.fill,
-        ),
+        margin: const EdgeInsets.only(bottom: 48),
+        child: Image.asset('assets/logo.png')
       ),
     );
   }

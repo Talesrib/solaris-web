@@ -1,7 +1,7 @@
 import 'package:sollaris_web_flutter/exports.dart';
 
-class NewBudgetPage extends StatelessWidget {
-  const NewBudgetPage({super.key});
+class SelectedBudgetPage extends StatelessWidget {
+  const SelectedBudgetPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +24,33 @@ class NewBudgetPage extends StatelessWidget {
   Widget _titleSection() {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.symmetric(
-        vertical: 24,
-        horizontal: 36,
+      padding: const EdgeInsets.only(
+        left: 36,
+        right: 11,
+        top: 14,
+        bottom: 14,
       ),
       decoration: const BoxDecoration(
           color: SollarisColors.neutral0,
           borderRadius: BorderRadius.all(Radius.circular(15))),
-      child: const Text('NOVO ORÇAMENTO').title(SollarisColors.neutral300),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text('ORÇAMENTO #12345').title(SollarisColors.neutral300),
+          SollarisButton(
+            width: 240,
+            height: 40,
+            label: 'GERAR PEDIDO',
+            onPressed: () {
+              Get.find<NavigatorController>().setRoute('new_order_page');
+            },
+            buttonType: ButtonType.primaryButton,
+            iconData: Icons.add,
+            iconColor: SollarisColors.neutral0,
+            iconSize: 24,
+          )
+        ],
+      ),
     );
   }
 
@@ -228,9 +247,9 @@ class NewBudgetPage extends StatelessWidget {
           child: SollarisButton(
             width: 260,
             height: 40,
-            label: 'GERAR ORÇAMENTO',
+            label: 'EDITAR ORÇAMENTO',
             onPressed: () {
-              Get.find<NavigatorController>().setRoute('selected_budget_page');
+              Get.find<NavigatorController>().setRoute('budget_list_page');
             },
             buttonType: ButtonType.primaryButton,
           ),

@@ -33,4 +33,15 @@ extension SolarisFonts on Text {
       style: textStyle.merge(style),
     );
   }
+
+  Text status([Color? color]) {
+    final TextStyle textStyle = GoogleFonts.montserrat(
+        fontWeight: FontWeight.w600,
+        fontSize: 12,
+        color: color ?? SollarisColors.neutral200);
+    return Text(
+      data!,
+      style: textStyle.merge(style),
+    );
+  }
 }

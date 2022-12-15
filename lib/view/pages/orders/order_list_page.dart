@@ -68,7 +68,7 @@ class OrderListPage extends StatelessWidget {
         children: [
           SollarisForm(
             width: 18.2.w,
-            title: 'Modelo',
+            title: 'Cliente',
             formWidget: SolarisTextInput(
               width: 18.2.w,
               height: 40,
@@ -79,7 +79,7 @@ class OrderListPage extends StatelessWidget {
           ),
           SollarisForm(
             width: 18.2.w,
-            title: 'Fabricante',
+            title: 'Status',
             formWidget: SolarisTextInput(
               width: 18.2.w,
               height: 40,
@@ -90,7 +90,7 @@ class OrderListPage extends StatelessWidget {
           ),
           SollarisForm(
             width: 18.2.w,
-            title: 'Potência',
+            title: 'Ordenar',
             formWidget: SolarisTextInput(
               width: 18.2.w,
               height: 40,
@@ -157,15 +157,19 @@ class OrderListPage extends StatelessWidget {
         position: Position.fisrt,
       ),
       TableHeader(
-        title: 'Modelo',
+        title: 'Cliente',
         position: Position.middle,
       ),
       TableHeader(
-        title: 'Fabricante',
+        title: 'Data',
         position: Position.middle,
       ),
       TableHeader(
-        title: 'Potência',
+        title: 'Total',
+        position: Position.middle,
+      ),
+      TableHeader(
+        title: 'Status',
         position: Position.last,
       ),
     ];
@@ -175,80 +179,124 @@ class OrderListPage extends StatelessWidget {
     return [
       [
         TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content: const Text('#12345').main(SollarisColors.link100),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
+              const Text('Cliente exemplo').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
+          content:
+              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        const TableItem(
+          content: StatusIndicator(status: Status.finalizado,),
           position: Position.middle,
         ),
       ],
       [
         TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content: const Text('#12345').main(SollarisColors.link100),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
+              const Text('Cliente exemplo').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
+          content:
+              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        const TableItem(
+          content: StatusIndicator(status: Status.finalizado,),
           position: Position.middle,
         ),
       ],
       [
         TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content: const Text('#12345').main(SollarisColors.link100),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
+              const Text('Cliente exemplo').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
+          content:
+              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        const TableItem(
+          content: StatusIndicator(status: Status.emAnalise,),
+          position: Position.middle,
+        ),
+      ],
+            [
+        TableItem(
+          content: const Text('#12345').main(SollarisColors.link100),
+          position: Position.middle,
+        ),
+        TableItem(
+          content:
+              const Text('Cliente exemplo').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content:
+              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        const TableItem(
+          content: StatusIndicator(status: Status.emAnalise,),
           position: Position.middle,
         ),
       ],
       [
         TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
+          content: const Text('#12345').main(SollarisColors.link100),
           position: Position.fisrt,
         ),
         TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content:
+              const Text('Cliente exemplo').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
+              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
+          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        const TableItem(
+          content: StatusIndicator(status: Status.cancelado,),
           position: Position.last,
         ),
-      ]
+      ],
     ];
   }
 }

@@ -183,7 +183,12 @@ class BudgetListPage extends StatelessWidget {
     return [
       [
         TableItem(
-          content: const Text('#12345').main(SollarisColors.link100),
+          content: TextButton(
+            child: const Text('#12345').main(SollarisColors.link100),
+            onPressed: () {
+              Get.find<NavigatorController>().setRoute('selected_budget_page');
+            },
+          ),
           position: Position.middle,
         ),
         TableItem(
