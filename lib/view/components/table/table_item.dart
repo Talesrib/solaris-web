@@ -12,24 +12,22 @@ class TableItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: position == Position.fisrt
-                ? const Radius.circular(15)
-                : Radius.zero,
-            bottomRight: position == Position.last
-                ? const Radius.circular(15)
-                : Radius.zero,
-          ),
-          border: Border.all(color: SollarisColors.neutral200),
-          color: SollarisColors.neutral0,
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: position == Position.fisrt
+              ? const Radius.circular(15)
+              : Radius.zero,
+          bottomRight: position == Position.last
+              ? const Radius.circular(15)
+              : Radius.zero,
         ),
-        height: 48,
-        child: content,
+        border: Border.all(color: SollarisColors.neutral200),
+        color: SollarisColors.neutral0,
       ),
+      height: 48,
+      child: content,
     );
   }
 }

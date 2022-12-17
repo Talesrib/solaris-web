@@ -24,14 +24,22 @@ class NewBudgetPage extends StatelessWidget {
   Widget _titleSection() {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.symmetric(
-        vertical: 24,
-        horizontal: 36,
+      padding: const EdgeInsets.only(
+        left: 36,
+        right: 11,
+        top: 14,
+        bottom: 14,
       ),
       decoration: const BoxDecoration(
           color: SollarisColors.neutral0,
           borderRadius: BorderRadius.all(Radius.circular(15))),
-      child: const Text('NOVO ORÇAMENTO').title(SollarisColors.neutral300),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text('NOVO ORÇAMENTO').title(SollarisColors.neutral300),
+          const SollarisBackButton(route: 'budget_list_page',),
+        ],
+      ),
     );
   }
 
@@ -129,12 +137,16 @@ class NewBudgetPage extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(top: 24),
-          child: SollarisButton(
-            width: 150,
-            height: 40,
-            label: 'CALCULAR',
-            onPressed: () {},
-            buttonType: ButtonType.primaryButton,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SollarisButton(
+                height: 40,
+                label: 'CALCULAR',
+                onPressed: () {},
+                buttonType: ButtonType.primaryButton,
+              ),
+            ],
           ),
         ),
       ],
@@ -154,12 +166,15 @@ class NewBudgetPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 36),
-            child: SollarisButton(
-              width: 260,
-              height: 40,
-              label: 'GRÁFICO DE GERAÇÃO',
-              onPressed: () {},
-              buttonType: ButtonType.secondaryButton,
+            child: Row(
+              children: [
+                SollarisButton(
+                  height: 40,
+                  label: 'GRÁFICO DE GERAÇÃO',
+                  onPressed: () {},
+                  buttonType: ButtonType.secondaryButton,
+                ),
+              ],
             ),
           )
         ],
@@ -226,7 +241,6 @@ class NewBudgetPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 36),
           child: SollarisButton(
-            width: 260,
             height: 40,
             label: 'GERAR ORÇAMENTO',
             onPressed: () {

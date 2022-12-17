@@ -111,7 +111,6 @@ class OrderListPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 24),
           child: SollarisButton(
-            width: 150,
             height: 40,
             label: 'LIMPAR',
             onPressed: () {},
@@ -119,7 +118,6 @@ class OrderListPage extends StatelessWidget {
           ),
         ),
         SollarisButton(
-          width: 150,
           height: 40,
           label: 'APLICAR',
           onPressed: () {},

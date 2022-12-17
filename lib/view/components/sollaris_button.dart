@@ -5,7 +5,6 @@ import 'package:sollaris_web_flutter/exports.dart';
 class SollarisButton extends StatelessWidget {
   SollarisButton({
     super.key,
-    required this.width,
     required this.height,
     required this.label,
     required this.onPressed,
@@ -15,7 +14,6 @@ class SollarisButton extends StatelessWidget {
     this.iconColor,
   });
 
-  final double width;
   final double height;
   final String label;
   final Function() onPressed;
@@ -32,8 +30,8 @@ class SollarisButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Container(
-        width: width,
         height: height,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           color: buttonType == ButtonType.primaryButton
               ? SollarisColors.primary100

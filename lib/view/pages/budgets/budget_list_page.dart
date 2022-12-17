@@ -39,7 +39,6 @@ class BudgetListPage extends StatelessWidget {
         children: [
           const Text('ORÇAMENTOS').title(SollarisColors.neutral300),
           SollarisButton(
-            width: 150,
             height: 40,
             label: 'NOVO',
             onPressed: () {
@@ -119,7 +118,6 @@ class BudgetListPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 24),
           child: SollarisButton(
-            width: 150,
             height: 40,
             label: 'LIMPAR',
             onPressed: () {},
@@ -127,7 +125,6 @@ class BudgetListPage extends StatelessWidget {
           ),
         ),
         SollarisButton(
-          width: 150,
           height: 40,
           label: 'APLICAR',
           onPressed: () {},

@@ -34,21 +34,16 @@ class SelectedBudgetPage extends StatelessWidget {
           color: SollarisColors.neutral0,
           borderRadius: BorderRadius.all(Radius.circular(15))),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           const Text('ORÇAMENTO #12345').title(SollarisColors.neutral300),
-          SollarisButton(
-            width: 240,
-            height: 40,
-            label: 'GERAR PEDIDO',
-            onPressed: () {
-              Get.find<NavigatorController>().setRoute('new_order_page');
-            },
-            buttonType: ButtonType.primaryButton,
-            iconData: Icons.add,
-            iconColor: SollarisColors.neutral0,
-            iconSize: 24,
-          )
+          const Spacer(),
+          const Padding(
+            padding: EdgeInsets.only(left: 8),
+            child: SollarisBackButton(
+              route: 'budget_list_page',
+            ),
+          ),
         ],
       ),
     );
@@ -149,7 +144,6 @@ class SelectedBudgetPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 24),
           child: SollarisButton(
-            width: 150,
             height: 40,
             label: 'CALCULAR',
             onPressed: () {},
@@ -172,9 +166,8 @@ class SelectedBudgetPage extends StatelessWidget {
             tableItems: _tableItems(),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 36),
+            padding: const EdgeInsets.symmetric(vertical: 36),
             child: SollarisButton(
-              width: 260,
               height: 40,
               label: 'GRÁFICO DE GERAÇÃO',
               onPressed: () {},
@@ -242,10 +235,20 @@ class SelectedBudgetPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
+        SollarisButton(
+          height: 40,
+          label: 'GERAR PEDIDO',
+          onPressed: () {
+            Get.find<NavigatorController>().setRoute('new_order_page');
+          },
+          buttonType: ButtonType.primaryButton,
+          iconData: Icons.add,
+          iconColor: SollarisColors.neutral0,
+          iconSize: 24,
+        ),
         Padding(
-          padding: const EdgeInsets.only(top: 36),
+          padding: const EdgeInsets.only(left: 24),
           child: SollarisButton(
-            width: 260,
             height: 40,
             label: 'EDITAR ORÇAMENTO',
             onPressed: () {
