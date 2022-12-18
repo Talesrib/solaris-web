@@ -22,7 +22,7 @@ class SollarisBackButton extends StatelessWidget {
           children: [
             const Icon(
               Icons.arrow_back_ios,
-              size: 20,
+              size: 18,
               color: SollarisColors.error100,
             ),
             Padding(

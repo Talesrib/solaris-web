@@ -5,13 +5,13 @@ class InverterListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-      return Container(
-        width: 76.w,
-        height: 100.h,
-        color: SollarisColors.neutral100,
-        padding: const EdgeInsets.all(70),
-        child: SingleChildScrollView(
+    return Container(
+      width: 76.w,
+      height: 100.h,
+      color: SollarisColors.neutral100,
+      child: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.all(70),
           child: Column(
             children: [
               _titleSection(),
@@ -20,7 +20,8 @@ class InverterListPage extends StatelessWidget {
             ],
           ),
         ),
-      );
+      ),
+    );
   }
 
   Widget _titleSection() {

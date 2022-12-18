@@ -1,4 +1,5 @@
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/view/pages/orders/selected_order_page.dart';
 
 class SelectedPage extends StatelessWidget {
   const SelectedPage({super.key});
@@ -19,6 +20,12 @@ class SelectedPage extends StatelessWidget {
             return const NewBudgetPage();
           case 'selected_budget_page':
             return const SelectedBudgetPage();
+          case 'order_list_page':
+            return const OrderListPage();
+          case 'new_order_page':
+            return const NewOrderPage();
+          case 'selected_order_page':
+            return const SelectedOrderPage();
           case 'client_list_page':
             return const ClientListPage();
           case 'my_profile_page':

@@ -9,14 +9,16 @@ class OrderListPage extends StatelessWidget {
       width: 76.w,
       height: 100.h,
       color: SollarisColors.neutral100,
-      padding: const EdgeInsets.all(70),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _titleSection(),
-            _filterSection(),
-            _contentSection(),
-          ],
+        child: Container(
+          margin: const EdgeInsets.all(70),
+          child: Column(
+            children: [
+              _titleSection(),
+              _filterSection(),
+              _contentSection(),
+            ],
+          ),
         ),
       ),
     );
@@ -177,7 +179,12 @@ class OrderListPage extends StatelessWidget {
     return [
       [
         TableItem(
-          content: const Text('#12345').main(SollarisColors.link100),
+          content: TextButton(
+            child: const Text('#12345').main(SollarisColors.link100),
+            onPressed: () {
+              Get.find<NavigatorController>().setRoute('selected_order_page');
+            },
+          ),
           position: Position.middle,
         ),
         TableItem(
@@ -195,7 +202,9 @@ class OrderListPage extends StatelessWidget {
           position: Position.middle,
         ),
         const TableItem(
-          content: StatusIndicator(status: Status.finalizado,),
+          content: StatusIndicator(
+            status: Status.finalizado,
+          ),
           position: Position.middle,
         ),
       ],
@@ -219,7 +228,9 @@ class OrderListPage extends StatelessWidget {
           position: Position.middle,
         ),
         const TableItem(
-          content: StatusIndicator(status: Status.finalizado,),
+          content: StatusIndicator(
+            status: Status.finalizado,
+          ),
           position: Position.middle,
         ),
       ],
@@ -243,11 +254,13 @@ class OrderListPage extends StatelessWidget {
           position: Position.middle,
         ),
         const TableItem(
-          content: StatusIndicator(status: Status.emAnalise,),
+          content: StatusIndicator(
+            status: Status.emAnalise,
+          ),
           position: Position.middle,
         ),
       ],
-            [
+      [
         TableItem(
           content: const Text('#12345').main(SollarisColors.link100),
           position: Position.middle,
@@ -267,7 +280,9 @@ class OrderListPage extends StatelessWidget {
           position: Position.middle,
         ),
         const TableItem(
-          content: StatusIndicator(status: Status.emAnalise,),
+          content: StatusIndicator(
+            status: Status.emAnalise,
+          ),
           position: Position.middle,
         ),
       ],
@@ -291,7 +306,9 @@ class OrderListPage extends StatelessWidget {
           position: Position.middle,
         ),
         const TableItem(
-          content: StatusIndicator(status: Status.cancelado,),
+          content: StatusIndicator(
+            status: Status.cancelado,
+          ),
           position: Position.last,
         ),
       ],

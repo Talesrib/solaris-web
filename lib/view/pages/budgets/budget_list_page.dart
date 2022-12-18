@@ -9,14 +9,16 @@ class BudgetListPage extends StatelessWidget {
       width: 76.w,
       height: 100.h,
       color: SollarisColors.neutral100,
-      padding: const EdgeInsets.all(70),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _titleSection(),
-            _filterSection(),
-            _contentSection(),
-          ],
+        child: Container(
+          margin: const EdgeInsets.all(70),
+          child: Column(
+            children: [
+              _titleSection(),
+              _filterSection(),
+              _contentSection(),
+            ],
+          ),
         ),
       ),
     );
@@ -47,7 +49,7 @@ class BudgetListPage extends StatelessWidget {
             buttonType: ButtonType.primaryButton,
             iconData: Icons.add,
             iconColor: SollarisColors.neutral0,
-            iconSize: 24,
+            iconSize: 20,
           )
         ],
       ),

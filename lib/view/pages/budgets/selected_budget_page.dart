@@ -9,13 +9,15 @@ class SelectedBudgetPage extends StatelessWidget {
       width: 76.w,
       height: 100.h,
       color: SollarisColors.neutral100,
-      padding: const EdgeInsets.all(70),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _titleSection(),
-            _contentSection(),
-          ],
+        child: Container(
+          margin: const EdgeInsets.all(70),
+          child: Column(
+            children: [
+              _titleSection(),
+              _contentSection(),
+            ],
+          ),
         ),
       ),
     );
@@ -143,11 +145,16 @@ class SelectedBudgetPage extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(top: 24),
-          child: SollarisButton(
-            height: 40,
-            label: 'CALCULAR',
-            onPressed: () {},
-            buttonType: ButtonType.primaryButton,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SollarisButton(
+                height: 40,
+                label: 'CALCULAR',
+                onPressed: () {},
+                buttonType: ButtonType.primaryButton,
+              ),
+            ],
           ),
         ),
       ],
@@ -167,11 +174,15 @@ class SelectedBudgetPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 36),
-            child: SollarisButton(
-              height: 40,
-              label: 'GRÁFICO DE GERAÇÃO',
-              onPressed: () {},
-              buttonType: ButtonType.secondaryButton,
+            child: Row(
+              children: [
+                SollarisButton(
+                  height: 40,
+                  label: 'GRÁFICO DE GERAÇÃO',
+                  onPressed: () {},
+                  buttonType: ButtonType.secondaryButton,
+                ),
+              ],
             ),
           )
         ],
@@ -244,7 +255,7 @@ class SelectedBudgetPage extends StatelessWidget {
           buttonType: ButtonType.primaryButton,
           iconData: Icons.add,
           iconColor: SollarisColors.neutral0,
-          iconSize: 24,
+          iconSize: 20,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 24),

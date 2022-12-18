@@ -9,13 +9,15 @@ class NewBudgetPage extends StatelessWidget {
       width: 76.w,
       height: 100.h,
       color: SollarisColors.neutral100,
-      padding: const EdgeInsets.all(70),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _titleSection(),
-            _contentSection(),
-          ],
+        child: Container(
+          margin: const EdgeInsets.all(70),
+          child: Column(
+            children: [
+              _titleSection(),
+              _contentSection(),
+            ],
+          ),
         ),
       ),
     );
