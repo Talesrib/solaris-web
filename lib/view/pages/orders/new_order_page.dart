@@ -79,11 +79,12 @@ class NewOrderPage extends StatelessWidget {
         SollarisForm(
           width: 28.w,
           title: 'Cliente',
-          formWidget: SolarisTextInput(
+          formWidget: SollarisDropdown(
             width: 28.w,
             height: 40,
-            textEditingController: TextEditingController(),
-            hint: '',
+            valueSelected: ValueNotifier(''),
+            values: const [],
+            mutable: false,
           ),
           mandatory: false,
         ),
@@ -107,11 +108,12 @@ class NewOrderPage extends StatelessWidget {
             SollarisForm(
               width: 18.2.w,
               title: 'Tipo da média de consumo',
-              formWidget: SolarisTextInput(
+              formWidget: SollarisDropdown(
                 width: 18.2.w,
                 height: 40,
-                textEditingController: TextEditingController(),
-                hint: '',
+                valueSelected: ValueNotifier(''),
+                values: const [],
+                mutable: false,
               ),
               mandatory: false,
             ),
@@ -129,11 +131,12 @@ class NewOrderPage extends StatelessWidget {
             SollarisForm(
               width: 18.2.w,
               title: 'Tipo de fase',
-              formWidget: SolarisTextInput(
+              formWidget: SollarisDropdown(
                 width: 18.2.w,
                 height: 40,
-                textEditingController: TextEditingController(),
-                hint: '',
+                valueSelected: ValueNotifier(''),
+                values: const [],
+                mutable: false,
               ),
               mandatory: false,
             ),
@@ -189,9 +192,7 @@ class NewOrderPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-              bottom: 12
-            ),
+            padding: const EdgeInsets.only(bottom: 12),
             child: const Text('Dados do orçamento')
                 .mainBold(SollarisColors.neutral300),
           ),

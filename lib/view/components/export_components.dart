@@ -4,6 +4,7 @@ export 'sollaris_fonts.dart';
 export 'sollaris_text_input.dart';
 export 'sollaris_form.dart';
 export 'sollaris_back_button.dart';
+export 'sollaris_dropdown.dart';
 
 export 'lateral_menu/sollaris_lateral_menu.dart';
 export 'lateral_menu/sollaris_menu_item.dart';

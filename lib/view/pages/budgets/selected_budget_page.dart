@@ -111,11 +111,14 @@ class SelectedBudgetPage extends StatelessWidget {
             SollarisForm(
               width: 18.2.w,
               title: 'Tipo da média de consumo',
-              formWidget: SolarisTextInput(
+              formWidget: SollarisDropdown(
                 width: 18.2.w,
                 height: 40,
-                textEditingController: TextEditingController(),
-                hint: '',
+                valueSelected: ValueNotifier('Anual'),
+                values: const [
+                  'Anual',
+                  'Mensal',
+                ],
               ),
               mandatory: false,
             ),
@@ -133,11 +136,15 @@ class SelectedBudgetPage extends StatelessWidget {
             SollarisForm(
               width: 18.2.w,
               title: 'Tipo de fase',
-              formWidget: SolarisTextInput(
-                width: 18.2.w,
+              formWidget: SollarisDropdown(
+                width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
-                hint: '',
+                valueSelected: ValueNotifier('Monofásica'),
+                values: const [
+                  'Monofásica',
+                  'Bifásica',
+                  'Trifásica',
+                ],
               ),
               mandatory: false,
             ),

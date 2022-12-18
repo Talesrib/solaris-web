@@ -69,10 +69,10 @@ class ClientListPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SollarisForm(
-            width: 18.2.w,
-            title: 'Modelo',
+            width: 14.w,
+            title: 'Nome',
             formWidget: SolarisTextInput(
-              width: 18.2.w,
+              width: 14.w,
               height: 40,
               textEditingController: TextEditingController(),
               hint: '',
@@ -80,27 +80,75 @@ class ClientListPage extends StatelessWidget {
             mandatory: false,
           ),
           SollarisForm(
-            width: 18.2.w,
-            title: 'Fabricante',
-            formWidget: SolarisTextInput(
-              width: 18.2.w,
+            width: 14.w,
+            title: 'Tipo',
+            formWidget: SollarisDropdown(
+              width: 14.w,
               height: 40,
-              textEditingController: TextEditingController(),
-              hint: '',
+              valueSelected: ValueNotifier('Todos'),
+              values: const [
+                'Todos',
+                'Pessoa física',
+                'Pessoa jurídica',
+              ],
             ),
             mandatory: false,
           ),
           SollarisForm(
-            width: 18.2.w,
-            title: 'Potência',
-            formWidget: SolarisTextInput(
-              width: 18.2.w,
+            width: 14.w,
+            title: 'Estado',
+            formWidget: SollarisDropdown(
+              width: 14.w,
               height: 40,
-              textEditingController: TextEditingController(),
-              hint: '',
+              valueSelected: ValueNotifier('Todos'),
+              values: const [
+                'Todos',
+                'AC',
+                'AL',
+                'AP',
+                'AM',
+                'BA',
+                'CE',
+                'DF',
+                'ES',
+                'GO',
+                'MA',
+                'MT',
+                'MS',
+                'MG',
+                'PA',
+                'PB',
+                'PR',
+                'PE',
+                'PI',
+                'RJ',
+                'RN',
+                'RS',
+                'RO',
+                'RR',
+                'SC',
+                'SP',
+                'SE',
+                'TO',
+              ],
             ),
             mandatory: false,
-          )
+          ),
+          SollarisForm(
+            width: 14.w,
+            title: 'Cidade',
+            formWidget: SollarisDropdown(
+              width: 14.w,
+              height: 40,
+              valueSelected: ValueNotifier('Todas'),
+              values: const [
+                'Todas',
+                'Capital',
+                'Outra',
+              ],
+            ),
+            mandatory: false,
+          ),
         ],
       ),
     );
@@ -157,15 +205,15 @@ class ClientListPage extends StatelessWidget {
         position: Position.fisrt,
       ),
       TableHeader(
-        title: 'Modelo',
+        title: 'Nome',
         position: Position.middle,
       ),
       TableHeader(
-        title: 'Fabricante',
+        title: 'Tipo',
         position: Position.middle,
       ),
       TableHeader(
-        title: 'Potência',
+        title: 'Cidade / Estado',
         position: Position.last,
       ),
     ];
@@ -179,16 +227,17 @@ class ClientListPage extends StatelessWidget {
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content:
+              const Text('Cliente exemplo').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: const Text('Pessoa física').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
+              const Text('Campina Grande - PB').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
       ],
@@ -198,16 +247,17 @@ class ClientListPage extends StatelessWidget {
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content:
+              const Text('Cliente exemplo').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: const Text('Pessoa física').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
+              const Text('Campina Grande - PB').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
       ],
@@ -217,16 +267,17 @@ class ClientListPage extends StatelessWidget {
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content:
+              const Text('Cliente exemplo').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: const Text('Pessoa física').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
+              const Text('Campina Grande - PB').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
       ],
@@ -236,19 +287,20 @@ class ClientListPage extends StatelessWidget {
           position: Position.fisrt,
         ),
         TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content:
+              const Text('Cliente exemplo').main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: const Text('Pessoa física').main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
+              const Text('Campina Grande - PB').main(SollarisColors.neutral300),
           position: Position.last,
         ),
-      ]
+      ],
     ];
   }
 }

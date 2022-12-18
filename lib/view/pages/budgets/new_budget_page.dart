@@ -39,7 +39,9 @@ class NewBudgetPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text('NOVO ORÇAMENTO').title(SollarisColors.neutral300),
-          const SollarisBackButton(route: 'budget_list_page',),
+          const SollarisBackButton(
+            route: 'budget_list_page',
+          ),
         ],
       ),
     );
@@ -77,11 +79,11 @@ class NewBudgetPage extends StatelessWidget {
         SollarisForm(
           width: 28.w,
           title: 'Cliente',
-          formWidget: SolarisTextInput(
+          formWidget: SollarisDropdown(
             width: 28.w,
             height: 40,
-            textEditingController: TextEditingController(),
-            hint: '',
+            valueSelected: ValueNotifier(''),
+            values: const [''],
           ),
           mandatory: false,
         ),
@@ -105,11 +107,14 @@ class NewBudgetPage extends StatelessWidget {
             SollarisForm(
               width: 18.2.w,
               title: 'Tipo da média de consumo',
-              formWidget: SolarisTextInput(
+              formWidget: SollarisDropdown(
                 width: 18.2.w,
                 height: 40,
-                textEditingController: TextEditingController(),
-                hint: '',
+                valueSelected: ValueNotifier('Anual'),
+                values: const [
+                  'Anual',
+                  'Mensal',
+                ],
               ),
               mandatory: false,
             ),
@@ -127,11 +132,15 @@ class NewBudgetPage extends StatelessWidget {
             SollarisForm(
               width: 18.2.w,
               title: 'Tipo de fase',
-              formWidget: SolarisTextInput(
-                width: 18.2.w,
+              formWidget: SollarisDropdown(
+                width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
-                hint: '',
+                valueSelected: ValueNotifier('Monofásica'),
+                values: const [
+                  'Monofásica',
+                  'Bifásica',
+                  'Trifásica',
+                ],
               ),
               mandatory: false,
             ),

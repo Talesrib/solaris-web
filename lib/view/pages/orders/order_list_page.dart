@@ -82,22 +82,31 @@ class OrderListPage extends StatelessWidget {
           SollarisForm(
             width: 18.2.w,
             title: 'Status',
-            formWidget: SolarisTextInput(
+            formWidget: SollarisDropdown(
               width: 18.2.w,
               height: 40,
-              textEditingController: TextEditingController(),
-              hint: '',
+              valueSelected: ValueNotifier('Todos'),
+              values: const [
+                'Todos',
+                'Em análise',
+                'Finalizado',
+                'Cancelado',
+              ],
             ),
             mandatory: false,
           ),
           SollarisForm(
             width: 18.2.w,
             title: 'Ordenar',
-            formWidget: SolarisTextInput(
+            formWidget: SollarisDropdown(
               width: 18.2.w,
               height: 40,
-              textEditingController: TextEditingController(),
-              hint: '',
+              valueSelected: ValueNotifier('Por data'),
+              values: const [
+                'Por cliente',
+                'Por data',
+                'Por valor total',
+              ],
             ),
             mandatory: false,
           )

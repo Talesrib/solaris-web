@@ -9,7 +9,7 @@ class SollarisLateralMenu extends StatelessWidget {
       init: NavigatorController(),
       builder: (navigatorController) {
         return Material(
-          elevation: 3,
+          elevation: 40,
           child: Container(
             width: 24.w,
             height: 100.h,

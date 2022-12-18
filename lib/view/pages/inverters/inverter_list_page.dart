@@ -82,22 +82,26 @@ class InverterListPage extends StatelessWidget {
           SollarisForm(
             width: 18.2.w,
             title: 'Fabricante',
-            formWidget: SolarisTextInput(
+            formWidget: SollarisDropdown(
               width: 18.2.w,
               height: 40,
-              textEditingController: TextEditingController(),
-              hint: '',
+              valueSelected: ValueNotifier('Nenhum'),
+              values: const [
+                'Nenhum',
+              ],
             ),
             mandatory: false,
           ),
           SollarisForm(
             width: 18.2.w,
             title: 'Potência',
-            formWidget: SolarisTextInput(
+            formWidget: SollarisDropdown(
               width: 18.2.w,
               height: 40,
-              textEditingController: TextEditingController(),
-              hint: '',
+              valueSelected: ValueNotifier('0 kW'),
+              values: const [
+                '0 kW',
+              ],
             ),
             mandatory: false,
           )

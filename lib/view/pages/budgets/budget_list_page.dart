@@ -100,11 +100,15 @@ class BudgetListPage extends StatelessWidget {
           SollarisForm(
             width: 28.w,
             title: 'Ordenar',
-            formWidget: SolarisTextInput(
+            formWidget: SollarisDropdown(
               width: 28.w,
               height: 40,
-              textEditingController: TextEditingController(),
-              hint: '',
+              valueSelected: ValueNotifier('Por data'),
+              values: const [
+                'Por cliente',
+                'Por data',
+                'Por valor total',
+              ],
             ),
             mandatory: false,
           ),
