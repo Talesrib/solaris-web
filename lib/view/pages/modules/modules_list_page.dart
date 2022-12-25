@@ -1,3 +1,4 @@
+import 'package:sollaris_web_flutter/controller/modules/module_list_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 
 class ModuleListPage extends StatelessWidget {
@@ -5,23 +6,25 @@ class ModuleListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 76.w,
-      height: 100.h,
-      color: SollarisColors.neutral100,
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(70),
-          child: Column(
-            children: [
-              _titleSection(),
-              _filterSection(),
-              _contentSection(),
-            ],
+    return GetBuilder<ModuleListController>(builder: (controller) {
+      return Container(
+        width: 76.w,
+        height: 100.h,
+        color: SollarisColors.neutral100,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(70),
+            child: Column(
+              children: [
+                _titleSection(),
+                _filterSection(controller),
+                _contentSection(controller),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _titleSection() {
@@ -38,7 +41,7 @@ class ModuleListPage extends StatelessWidget {
     );
   }
 
-  Widget _filterSection() {
+  Widget _filterSection(ModuleListController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -53,17 +56,17 @@ class ModuleListPage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _filterFields(),
+          _filterFields(controller),
           Padding(
             padding: const EdgeInsets.only(top: 24),
-            child: _filterButtons(),
+            child: _filterButtons(controller),
           )
         ],
       ),
     );
   }
 
-  Widget _filterFields() {
+  Widget _filterFields(ModuleListController controller) {
     return SizedBox(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,7 +77,7 @@ class ModuleListPage extends StatelessWidget {
             formWidget: SolarisTextInput(
               width: 18.2.w,
               height: 40,
-              textEditingController: TextEditingController(),
+              textEditingController: controller.modelFilterNotifier,
               hint: '',
             ),
             mandatory: false,
@@ -85,7 +88,7 @@ class ModuleListPage extends StatelessWidget {
             formWidget: SollarisDropdown(
               width: 18.2.w,
               height: 40,
-              valueSelected: ValueNotifier('Nenhum'),
+              valueSelected: controller.providerFilterNotifier,
               values: const [
                 'Nenhum',
               ],
@@ -98,7 +101,7 @@ class ModuleListPage extends StatelessWidget {
             formWidget: SollarisDropdown(
               width: 18.2.w,
               height: 40,
-              valueSelected: ValueNotifier('0 W'),
+              valueSelected: controller.powerFilterNotifier,
               values: const [
                 '0 W',
               ],
@@ -110,7 +113,7 @@ class ModuleListPage extends StatelessWidget {
     );
   }
 
-  Widget _filterButtons() {
+  Widget _filterButtons(ModuleListController controller) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -119,21 +122,25 @@ class ModuleListPage extends StatelessWidget {
           child: SollarisButton(
             height: 40,
             label: 'LIMPAR',
-            onPressed: () {},
+            onPressed: () {
+              controller.clearFilter();
+            },
             buttonType: ButtonType.secondaryButton,
           ),
         ),
         SollarisButton(
           height: 40,
           label: 'APLICAR',
-          onPressed: () {},
+          onPressed: () {
+            controller.applyFilter();
+          },
           buttonType: ButtonType.primaryButton,
         ),
       ],
     );
   }
 
-  Widget _contentSection() {
+  Widget _contentSection(ModuleListController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(

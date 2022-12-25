@@ -28,6 +28,10 @@ class SelectedPage extends StatelessWidget {
             return const SelectedOrderPage();
           case 'client_list_page':
             return const ClientListPage();
+          case 'new_client_page':
+            return const NewClientPage();
+          case 'selected_client_page':
+            return const SelectedClientPage();
           case 'my_profile_page':
             return const MyProfilePage();
           default:

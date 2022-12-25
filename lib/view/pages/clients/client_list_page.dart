@@ -27,14 +27,32 @@ class ClientListPage extends StatelessWidget {
   Widget _titleSection() {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.symmetric(
-        vertical: 24,
-        horizontal: 36,
+      padding: const EdgeInsets.only(
+        left: 36,
+        right: 11,
+        top: 14,
+        bottom: 14,
       ),
       decoration: const BoxDecoration(
           color: SollarisColors.neutral0,
           borderRadius: BorderRadius.all(Radius.circular(15))),
-      child: const Text('CLIENTES').title(SollarisColors.neutral300),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text('CLIENTES').title(SollarisColors.neutral300),
+          SollarisButton(
+            height: 40,
+            label: 'NOVO',
+            onPressed: () {
+              Get.find<NavigatorController>().setRoute('new_client_page');
+            },
+            buttonType: ButtonType.primaryButton,
+            iconData: Icons.add,
+            iconColor: SollarisColors.neutral0,
+            iconSize: 20,
+          )
+        ],
+      ),
     );
   }
 
@@ -223,7 +241,12 @@ class ClientListPage extends StatelessWidget {
     return [
       [
         TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
+          content: TextButton(
+            child: const Text('#12345').main(SollarisColors.link100),
+            onPressed: () {
+              Get.find<NavigatorController>().setRoute('selected_client_page');
+            },
+          ),
           position: Position.middle,
         ),
         TableItem(
