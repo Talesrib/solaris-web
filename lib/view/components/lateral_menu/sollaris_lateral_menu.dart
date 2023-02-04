@@ -6,7 +6,6 @@ class SollarisLateralMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NavigatorController>(
-      init: NavigatorController(),
       builder: (navigatorController) {
         return Material(
           elevation: 40,

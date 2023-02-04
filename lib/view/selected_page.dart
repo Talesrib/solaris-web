@@ -7,7 +7,6 @@ class SelectedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NavigatorController>(
-      init: NavigatorController(),
       builder: (navigatorController) {
         switch (navigatorController.getRoute()) {
           case 'module_list_page':

@@ -1,4 +1,3 @@
-import 'package:sollaris_web_flutter/controller/modules/module_list_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 
 class ModuleListPage extends StatelessWidget {
@@ -91,6 +90,7 @@ class ModuleListPage extends StatelessWidget {
               valueSelected: controller.providerFilterNotifier,
               values: const [
                 'Nenhum',
+                'Todos',
               ],
             ),
             mandatory: false,
@@ -104,6 +104,7 @@ class ModuleListPage extends StatelessWidget {
               valueSelected: controller.powerFilterNotifier,
               values: const [
                 '0 W',
+                'Todas',
               ],
             ),
             mandatory: false,
