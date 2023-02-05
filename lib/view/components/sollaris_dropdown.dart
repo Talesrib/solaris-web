@@ -9,6 +9,7 @@ class SollarisDropdown extends StatefulWidget {
     required this.height,
     required this.valueSelected,
     required this.values,
+    this.onChanged,
     this.mutable,
   });
 
@@ -16,6 +17,7 @@ class SollarisDropdown extends StatefulWidget {
   final double height;
   final ValueNotifier<String> valueSelected;
   final List<String> values;
+  Function()? onChanged;
   bool? mutable;
 
   @override
@@ -60,6 +62,7 @@ class _SollarisDropdownState extends State<SollarisDropdown> {
               onChanged: (String? value) {
                 setState(() {
                   widget.valueSelected.value = value!;
+                  widget.onChanged?.call();
                 });
               },
               items:

@@ -1,8 +1,21 @@
 import 'package:sollaris_web_flutter/exports.dart';
 import 'package:sollaris_web_flutter/model/modules/export_module_models.dart';
 
-class ModuleListPage extends StatelessWidget {
+class ModuleListPage extends StatefulWidget {
   const ModuleListPage({super.key});
+
+  @override
+  State<ModuleListPage> createState() => _ModuleListPageState();
+}
+
+class _ModuleListPageState extends State<ModuleListPage> {
+
+  @override
+  void initState() {
+    Get.find<ModuleListController>().loadModules();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

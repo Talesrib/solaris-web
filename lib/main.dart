@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sollaris_web_flutter/app_binding.dart';
+import 'package:sollaris_web_flutter/network/budgets/network_service.dart';
 import 'package:sollaris_web_flutter/network/clients/network_service.dart';
 import 'package:sollaris_web_flutter/network/export_network.dart';
 import 'package:sollaris_web_flutter/view/pages/main_page.dart';
@@ -35,6 +36,12 @@ void registerNetworkServices({
     )
     ..registerLazySingleton(
       () => ClientService.create(
+        baseUrl: baseUrl,
+        interceptors: [],
+      ),
+    )
+    ..registerLazySingleton(
+      () => BudgetService.create(
         baseUrl: baseUrl,
         interceptors: [],
       ),

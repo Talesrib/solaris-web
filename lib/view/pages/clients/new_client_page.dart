@@ -91,6 +91,7 @@ class NewClientPage extends StatelessWidget {
               'Pessoa física',
               'Pessoa jurídica',
             ],
+            onChanged: () => controller.update(),
           ),
           mandatory: false,
         ),
@@ -113,7 +114,9 @@ class NewClientPage extends StatelessWidget {
           children: [
             SollarisForm(
               width: 28.w,
-              title: 'Nome completo',
+              title: controller.personTypeNotifier.value == 'Pessoa física'
+                  ? 'Nome completo'
+                  : 'Razão social',
               formWidget: SolarisTextInput(
                 width: 28.w,
                 height: 40,
@@ -124,7 +127,9 @@ class NewClientPage extends StatelessWidget {
             ),
             SollarisForm(
               width: 28.w,
-              title: 'CPF',
+              title: controller.personTypeNotifier.value == 'Pessoa física'
+                  ? 'CPF'
+                  : 'CNPJ',
               formWidget: SolarisTextInput(
                 width: 28.w,
                 height: 40,

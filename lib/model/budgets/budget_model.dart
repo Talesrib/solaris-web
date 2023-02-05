@@ -16,6 +16,8 @@ class BudgetModel {
     this.custo,
     this.taxaDeRetorno,
     this.dataSolicitacao,
+    this.nomeCliente,
+    this.pedidoGerado,
   });
 
   factory BudgetModel.fromJson(Map<String, dynamic>? json) => BudgetModel(
@@ -30,6 +32,8 @@ class BudgetModel {
         custo: json?['custo'] as double?,
         taxaDeRetorno: json?['taxaDeRetorno'] as double?,
         dataSolicitacao: json?['dataSolicitacao'] as String?,
+        nomeCliente: json?['nomeCliente'] as String?,
+        pedidoGerado: json?['pedidoGerado'] as bool?,
       );
 
   double? id;
@@ -43,6 +47,8 @@ class BudgetModel {
   double? custo;
   double? taxaDeRetorno;
   String? dataSolicitacao;
+  String? nomeCliente;
+  bool? pedidoGerado;
 
   Map<String, dynamic> toJson() => _$BudgetModelToJson(this);
 

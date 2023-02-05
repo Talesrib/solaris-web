@@ -3,9 +3,6 @@ import 'package:sollaris_web_flutter/model/modules/export_module_models.dart';
 import 'package:sollaris_web_flutter/repository/modules/modules_repository.dart';
 
 class ModuleListController extends GetxController {
-  ModuleListController() {
-    loadModules();
-  }
 
   final _repository = ModulesRepository();
 

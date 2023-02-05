@@ -6,23 +6,49 @@ part 'client_model.g.dart';
 class ClientModel {
   ClientModel({
     this.id,
-    this.cpf,
     this.nome,
-    this.idade,
+    this.tipo,
+    this.cpfCnpj,
+    this.cep,
+    this.endereco,
+    this.numero,
+    this.cidade,
+    this.estado,
+    this.email,
+    this.complemento,
+    this.senha,
+    this.celular,
   });
 
-  factory ClientModel.fromJson(Map<String, dynamic>? json) =>
-      ClientModel(
-        id: json?['id'] as String?,
-        cpf: json?['cpf'] as double?,
+  factory ClientModel.fromJson(Map<String, dynamic>? json) => ClientModel(
+        id: json?['id'] as double?,
         nome: json?['nome'] as String?,
-        idade: json?['idade'] as double?,
+        tipo: json?['tipo'] as String?,
+        cpfCnpj: json?['cpfCnpj'] as double?,
+        cep: json?['cep'] as double?,
+        endereco: json?['endereco'] as String?,
+        numero: json?['numero'] as String?,
+        cidade: json?['cidade'] as String?,
+        estado: json?['estado'] as String?,
+        email: json?['email'] as String?,
+        complemento: json?['complemento'] as String?,
+        senha: json?['senha'] as String?,
+        celular: json?['celular'] as String?,
       );
 
-  String? id;
-  double? cpf;
+  double? id;
   String? nome;
-  double? idade;
+  String? tipo;
+  double? cpfCnpj;
+  double? cep;
+  String? endereco;
+  String? numero;
+  String? cidade;
+  String? estado;
+  String? email;
+  String? complemento;
+  String? senha;
+  String? celular;
 
   Map<String, dynamic> toJson() => _$ClientModelToJson(this);
 

@@ -10,12 +10,12 @@ class ClientListPage extends StatefulWidget {
 }
 
 class _ClientListPageState extends State<ClientListPage> {
-  // @override
-  // void initState() {
-  //   Get.find()<ClientListController>();
+  @override
+  void initState() {
+    Get.find<ClientListController>().loadClients();
 
-  //   super.initState();
-  // }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -237,19 +237,19 @@ class _ClientListPageState extends State<ClientListPage> {
   List<Widget> _tableHeader() {
     return const [
       TableHeader(
-        title: 'ID',
-        position: Position.fisrt,
-      ),
-      TableHeader(
         title: 'Nome',
-        position: Position.middle,
+        position: Position.fisrt,
       ),
       TableHeader(
         title: 'Tipo',
         position: Position.middle,
       ),
       TableHeader(
-        title: 'Cidade / Estado',
+        title: 'Cidade',
+        position: Position.middle,
+      ),
+      TableHeader(
+        title: 'Estado',
         position: Position.last,
       ),
     ];
@@ -263,20 +263,21 @@ class _ClientListPageState extends State<ClientListPage> {
 
       items.add([
         TableItem(
-          content: Text((count + 1).toString()).main(SollarisColors.neutral300),
+          content: Text(model.nome.toString()).main(SollarisColors.neutral300),
           position: count == list.length - 1 ? Position.fisrt : Position.middle,
         ),
         TableItem(
-          content: Text(model.nome.toString()).main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Pessoa física').main(SollarisColors.neutral300),
+          content: Text(model.tipo.toString()).main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Campina Grande / PB').main(SollarisColors.neutral300),
+              Text(model.cidade.toString()).main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content:
+              Text(model.estado.toString()).main(SollarisColors.neutral300),
           position: count == list.length - 1 ? Position.last : Position.middle,
         ),
       ]);

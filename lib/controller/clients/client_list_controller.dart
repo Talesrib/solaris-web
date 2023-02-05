@@ -3,9 +3,6 @@ import 'package:sollaris_web_flutter/model/clients/client_model.dart';
 import 'package:sollaris_web_flutter/repository/clients/clients_repository.dart';
 
 class ClientListController extends GetxController {
-  ClientListController() {
-    loadClients();
-  }
 
   final _repository = ClientRepository();
 

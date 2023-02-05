@@ -3,16 +3,34 @@
 // **************************************************************************
 
 ClientModel _$ClientModelFromJson(Map<String, dynamic> json) => ClientModel(
-      id: json['id'] as String?,
-      cpf: (json['cpf'] as num?)?.toDouble(),
+      id: (json['id'] as num?)?.toDouble(),
       nome: json['nome'] as String?,
-      idade: (json['idade'] as num?)?.toDouble(),
+      tipo: json['tipo'] as String?,
+      cpfCnpj: (json['cpfCnpj'] as num?)?.toDouble(),
+      cep: (json['cep'] as num?)?.toDouble(),
+      endereco: json['endereco'] as String?,
+      numero: json['numero'] as String?,
+      cidade: json['cidade'] as String?,
+      estado: json['estado'] as String?,
+      email: json['email'] as String?,
+      complemento: json['complemento'] as String?,
+      senha: json['senha'] as String?,
+      celular: json['celular'] as String?,
     );
 
 Map<String, dynamic> _$ClientModelToJson(ClientModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'cpf': instance.cpf,
       'nome': instance.nome,
-      'idade': instance.idade,
+      'tipo': instance.tipo,
+      'cpfCnpj': instance.cpfCnpj,
+      'cep': instance.cep,
+      'endereco': instance.endereco,
+      'numero': instance.numero,
+      'cidade': instance.cidade,
+      'estado': instance.estado,
+      'email': instance.email,
+      'complemento': instance.complemento,
+      'senha': instance.senha,
+      'celular': instance.celular,
     };

@@ -1,27 +1,44 @@
+import 'package:sollaris_web_flutter/controller/budgets/budget_list_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/model/budgets/budget_model.dart';
 
-class BudgetListPage extends StatelessWidget {
+class BudgetListPage extends StatefulWidget {
   const BudgetListPage({super.key});
 
   @override
+  State<BudgetListPage> createState() => _BudgetListPageState();
+}
+
+class _BudgetListPageState extends State<BudgetListPage> {
+  
+  @override
+  void initState() {
+    Get.find<BudgetListController>().loadBudgets();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 76.w,
-      height: 100.h,
-      color: SollarisColors.neutral100,
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(70),
-          child: Column(
-            children: [
-              _titleSection(),
-              _filterSection(),
-              _contentSection(),
-            ],
+    return GetBuilder<BudgetListController>(builder: (controller) {
+      return Container(
+        width: 76.w,
+        height: 100.h,
+        color: SollarisColors.neutral100,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(70),
+            child: Column(
+              children: [
+                _titleSection(),
+                _filterSection(),
+                _contentSection(controller),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _titleSection() {
@@ -140,7 +157,7 @@ class BudgetListPage extends StatelessWidget {
     );
   }
 
-  Widget _contentSection() {
+  Widget _contentSection(BudgetListController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -156,7 +173,7 @@ class BudgetListPage extends StatelessWidget {
       child: SollarisTable(
         tableWidth: 84.5.w,
         headerItems: _tableHeader(),
-        tableItems: _tableItems(),
+        tableItems: _tableItems(controller.budgetList),
       ),
     );
   }
@@ -177,98 +194,51 @@ class BudgetListPage extends StatelessWidget {
       ),
       TableHeader(
         title: 'Total',
+        position: Position.middle,
+      ),
+      TableHeader(
+        title: 'Pedido gerado',
         position: Position.last,
       ),
     ];
   }
 
-  List<List<Widget>> _tableItems() {
-    return [
-      [
+  List<List<Widget>> _tableItems(List<BudgetModel> list) {
+    final items = <List<Widget>>[];
+
+    for (var count = 0; count < list.length; count++) {
+      final model = list[count];
+
+      items.add([
         TableItem(
-          content: TextButton(
-            child: const Text('#12345').main(SollarisColors.link100),
-            onPressed: () {
-              Get.find<NavigatorController>().setRoute('selected_budget_page');
-            },
-          ),
+          content: Text(model.id.toString()).main(SollarisColors.neutral300),
+          position: count == list.length - 1 ? Position.fisrt : Position.middle,
+        ),
+        TableItem(
+          content: Text(model.id.toString()).main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
+          content: Text(model.dataSolicitacao.toString())
+              .main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content:
-              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
+          content: Text(model.custo.toString()).main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
-          position: Position.middle,
+          content: model.pedidoGerado == true
+              ? const Icon(
+                  Icons.check_circle_outline,
+                  color: Colors.green,
+                )
+              : const SizedBox(),
+          position: count == list.length - 1 ? Position.last : Position.middle,
         ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.link100),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.link100),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.link100),
-          position: Position.fisrt,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
-          position: Position.last,
-        ),
-      ],
-    ];
+      ]);
+    }
+
+    return items;
   }
 }

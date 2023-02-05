@@ -28,10 +28,19 @@ class ClientPostController extends GetxController {
 
   Future<void> postClient() async {
     final body = ClientModel(
-      id: '',
+      id: 0,
       nome: nameNotifier.text,
-      cpf: double.tryParse(documentNotifier.text),
-      idade: 25,
+      tipo: personTypeNotifier.value,
+      cpfCnpj: double.tryParse(documentNotifier.text),
+      cep: double.tryParse(cepNotifier.text),
+      endereco: addressNotifier.text,
+      numero: numberNotifier.text,
+      cidade: cityNotifier.value,
+      estado: stateNotifier.value,
+      email: emailotifier.text,
+      complemento: complementNotifier.text,
+      senha: passwordNotifier.text,
+      celular: cellphoneNotifier.text,
     );
 
     await _repository.postClient(body.toJson());

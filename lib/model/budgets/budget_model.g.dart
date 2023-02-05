@@ -18,6 +18,8 @@ BudgetModel _$BudgetModelFromJson(Map<String, dynamic> json) => BudgetModel(
       custo: (json['custo'] as num?)?.toDouble(),
       taxaDeRetorno: (json['taxaDeRetorno'] as num?)?.toDouble(),
       dataSolicitacao: json['dataSolicitacao'] as String?,
+      nomeCliente: json['nomeCliente'] as String?,
+      pedidoGerado: json['pedidoGerado'] as bool?,
     );
 
 Map<String, dynamic> _$BudgetModelToJson(BudgetModel instance) =>
@@ -33,4 +35,6 @@ Map<String, dynamic> _$BudgetModelToJson(BudgetModel instance) =>
       'custo': instance.custo,
       'taxaDeRetorno': instance.taxaDeRetorno,
       'dataSolicitacao': instance.dataSolicitacao,
+      'nomeCliente': instance.nomeCliente,
+      'pedidoGerado': instance.pedidoGerado,
     };
