@@ -1,4 +1,5 @@
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/model/modules/export_module_models.dart';
 
 class ModuleListPage extends StatelessWidget {
   const ModuleListPage({super.key});
@@ -133,7 +134,7 @@ class ModuleListPage extends StatelessWidget {
           height: 40,
           label: 'APLICAR',
           onPressed: () {
-            controller.applyFilter();
+            controller.loadModules();
           },
           buttonType: ButtonType.primaryButton,
         ),
@@ -157,7 +158,7 @@ class ModuleListPage extends StatelessWidget {
       child: SollarisTable(
         tableWidth: 84.5.w,
         headerItems: _tableHeader(),
-        tableItems: _tableItems(),
+        tableItems: _tableItems(controller.moduleList),
       ),
     );
   }
@@ -183,84 +184,34 @@ class ModuleListPage extends StatelessWidget {
     ];
   }
 
-  List<List<Widget>> _tableItems() {
-    return [
-      [
+  List<List<Widget>> _tableItems(List<ModuleModel> list) {
+    final items = <List<Widget>>[];
+
+    for (var count = 0; count < list.length; count++) {
+      final model = list[count];
+
+      items.add([
         TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
+          content: Text(model.id.toString()).main(SollarisColors.neutral300),
+          position: count == list.length - 1 ? Position.fisrt : Position.middle,
         ),
         TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content:
+              Text(model.modelo.toString()).main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
+              Text(model.fabricante.toString()).main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
-          position: Position.middle,
+          content: Text('${model.potencia} W').main(SollarisColors.neutral300),
+          position: count == list.length - 1 ? Position.last : Position.middle,
         ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.fisrt,
-        ),
-        TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 W').main(SollarisColors.neutral300),
-          position: Position.last,
-        ),
-      ]
-    ];
+      ]);
+    }
+
+    return items;
   }
 }

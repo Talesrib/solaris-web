@@ -1,10 +1,10 @@
 import 'package:chopper/chopper.dart';
-import 'package:sollaris_web_flutter/model/module/export_module_models.dart';
+import 'package:sollaris_web_flutter/model/modules/export_module_models.dart';
 import 'package:sollaris_web_flutter/network/export_network.dart';
 
 part 'network_service.chopper.dart';
 
-@ChopperApi(baseUrl: 'localhost:7070/api')
+@ChopperApi(baseUrl: '')
 abstract class ModuleService extends ChopperService {
   static ModuleService create({
     required Iterable<dynamic> interceptors,
@@ -20,5 +20,5 @@ abstract class ModuleService extends ChopperService {
   }
 
   @Get(path: '/modulos')
-  Future<Response<ModuleGetAllListModel>> getAllIntegrator();
+  Future<Response<List<ModuleModel>>> getAllModules();
 }

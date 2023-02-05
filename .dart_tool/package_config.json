@@ -206,6 +206,12 @@
       "languageVersion": "2.15"
     },
     {
+      "name": "get_it",
+      "rootUri": "file:///Users/ronaldoolenhador/.pub-cache/hosted/pub.dev/get_it-7.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "glob",
       "rootUri": "file:///Users/ronaldoolenhador/.pub-cache/hosted/pub.dev/glob-2.1.1",
       "packageUri": "lib/",
@@ -548,7 +554,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-02-04T15:33:54.837241Z",
+  "generated": "2023-02-04T15:42:38.596596Z",
   "generator": "pub",
   "generatorVersion": "2.19.0"
 }

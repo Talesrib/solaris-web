@@ -17,13 +17,13 @@ class _$ModuleService extends ModuleService {
   final definitionType = ModuleService;
 
   @override
-  Future<Response<ModuleGetAllListModel>> getAllIntegrator() {
-    final Uri $url = Uri.parse('localhost:7070/api/modulos');
+  Future<Response<List<ModuleModel>>> getAllModules() {
+    final Uri $url = Uri.parse('/modulos');
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
     );
-    return client.send<ModuleGetAllListModel, ModuleGetAllListModel>($request);
+    return client.send<List<ModuleModel>, ModuleModel>($request);
   }
 }

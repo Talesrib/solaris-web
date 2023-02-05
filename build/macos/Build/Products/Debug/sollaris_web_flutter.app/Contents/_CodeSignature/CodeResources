@@ -6,19 +6,15 @@
 	<dict>
 		<key>Resources/AppIcon.icns</key>
 		<data>
-		URS7ZMjS6R2b/EKu5Z1xZIypGck=
+		aAxGg0Q+dQoQhfAk9AHVCAev338=
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		ZqzWWZTpUOSXeejGNq+13/OiKjA=
+		QRU3/LZV3Ti5yJ343NbUp08Khhk=
 		</data>
-		<key>Resources/Base.lproj/MainMenu.nib/keyedobjects-101300.nib</key>
+		<key>Resources/Base.lproj/MainMenu.nib</key>
 		<data>
 		njiVId1V2ZpbsYvYm36++F5yxfg=
-		</data>
-		<key>Resources/Base.lproj/MainMenu.nib/keyedobjects.nib</key>
-		<data>
-		GZpUSypNttz2zMPIauFhc5+Rr9Y=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -27,19 +23,19 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			wl2zz32x+UjwCi4DYi6Pytefw00=
+			TFUeW26vBFgDX0fUlRCSxhE3bmg=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"c25db3cf7db1f948f00a2e03622e8fcad79fc34d"</string>
+			<string>cdhash H"4c551e5b6eaf0458035f47d4951092c611376e68"</string>
 		</dict>
 		<key>Frameworks/FlutterMacOS.framework</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			+ts6t/CoD/KJnU8MYPuIAnhdjAE=
+			5ma6c8Iq2PkMgll4JwvacjMsWCw=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"fadb3ab7f0a80ff2899d4f0c60fb8802785d8c01"</string>
+			<string>cdhash H"e666ba73c22ad8f90c825978270bda72332c582c"</string>
 		</dict>
 		<key>Frameworks/libswiftAppKit.dylib</key>
 		<dict>
@@ -194,6 +190,15 @@
 			<key>requirement</key>
 			<string>cdhash H"3406aab10f486b91c2d9334de341504de56a5631" or cdhash H"73e04119822f2d8cd5eeb426ddac2b2b98295def"</string>
 		</dict>
+		<key>Frameworks/path_provider_foundation.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			4oIz4JtrccJ7THyNAFrRb9shbh8=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"e28233e09b6b71c27b4c7c8d005ad16fdb216e1f"</string>
+		</dict>
 		<key>Frameworks/path_provider_macos.framework</key>
 		<dict>
 			<key>cdhash</key>
@@ -207,28 +212,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mnw/86rBhdpr28A9GFSr/xwLnYgcKRhSPRhn0wpyVWQ=
+			cmkXXoTx+ZUjFC50oDL4Cmb6f++oBA9wPejlIra72Gc=
 			</data>
 		</dict>
 		<key>Resources/Assets.car</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2fcOKkmjoanGqsFOEROIT5LN6/CZkLUJcDBnKU1JrKg=
+			EuJWQbOeKwc3a4+9WzZlGBFiDGAjKABusxYRiJ3iw60=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/MainMenu.nib/keyedobjects-101300.nib</key>
+		<key>Resources/Base.lproj/MainMenu.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			ELQ3tDt+stU3zZQcs10MfNp7p9UBNOqphD1OODh2wfI=
-			</data>
-		</dict>
-		<key>Resources/Base.lproj/MainMenu.nib/keyedobjects.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			JxocghpEGs746cz3gT28BuvvhaClMgf0VAsH2iZzY3Q=
 			</data>
 		</dict>
 	</dict>

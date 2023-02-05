@@ -1,3 +1,4 @@
+import 'package:sollaris_web_flutter/controller/clients/client_post_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 
 class NewClientPage extends StatelessWidget {
@@ -5,22 +6,24 @@ class NewClientPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 76.w,
-      height: 100.h,
-      color: SollarisColors.neutral100,
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(70),
-          child: Column(
-            children: [
-              _titleSection(),
-              _contentSection(),
-            ],
+    return GetBuilder<ClientPostController>(builder: (controller) {
+      return Container(
+        width: 76.w,
+        height: 100.h,
+        color: SollarisColors.neutral100,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(70),
+            child: Column(
+              children: [
+                _titleSection(),
+                _contentSection(controller),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _titleSection() {
@@ -47,7 +50,7 @@ class NewClientPage extends StatelessWidget {
     );
   }
 
-  Widget _contentSection() {
+  Widget _contentSection(ClientPostController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -63,17 +66,17 @@ class NewClientPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _typeForm(),
-          _dataForm(),
-          _addressForm(),
-          _accessForm(),
-          _registerOrderButton(),
+          _typeForm(controller),
+          _dataForm(controller),
+          _addressForm(controller),
+          _accessForm(controller),
+          _registerOrderButton(controller),
         ],
       ),
     );
   }
 
-  Widget _typeForm() {
+  Widget _typeForm(ClientPostController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,7 +86,7 @@ class NewClientPage extends StatelessWidget {
           formWidget: SollarisDropdown(
             width: 28.w,
             height: 40,
-            valueSelected: ValueNotifier('Pessoa física'),
+            valueSelected: controller.personTypeNotifier,
             values: const [
               'Pessoa física',
               'Pessoa jurídica',
@@ -95,7 +98,7 @@ class NewClientPage extends StatelessWidget {
     );
   }
 
-  Widget _dataForm() {
+  Widget _dataForm(ClientPostController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -114,7 +117,7 @@ class NewClientPage extends StatelessWidget {
               formWidget: SolarisTextInput(
                 width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.nameNotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -125,7 +128,7 @@ class NewClientPage extends StatelessWidget {
               formWidget: SolarisTextInput(
                 width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.documentNotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -142,7 +145,7 @@ class NewClientPage extends StatelessWidget {
     );
   }
 
-  Widget _addressForm() {
+  Widget _addressForm(ClientPostController controller) {
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: Column(
@@ -157,7 +160,7 @@ class NewClientPage extends StatelessWidget {
                 formWidget: SolarisTextInput(
                   width: 18.2.w,
                   height: 40,
-                  textEditingController: TextEditingController(),
+                  textEditingController: controller.cepNotifier,
                   hint: '',
                 ),
                 mandatory: false,
@@ -168,7 +171,7 @@ class NewClientPage extends StatelessWidget {
                 formWidget: SolarisTextInput(
                   width: 18.2.w,
                   height: 40,
-                  textEditingController: TextEditingController(),
+                  textEditingController: controller.addressNotifier,
                   hint: '',
                 ),
                 mandatory: false,
@@ -179,7 +182,7 @@ class NewClientPage extends StatelessWidget {
                 formWidget: SolarisTextInput(
                   width: 18.2.w,
                   height: 40,
-                  textEditingController: TextEditingController(),
+                  textEditingController: controller.numberNotifier,
                   hint: '',
                 ),
                 mandatory: false,
@@ -198,7 +201,7 @@ class NewClientPage extends StatelessWidget {
                 formWidget: SolarisTextInput(
                   width: 18.2.w,
                   height: 40,
-                  textEditingController: TextEditingController(),
+                  textEditingController: controller.complementNotifier,
                   hint: '',
                 ),
                 mandatory: false,
@@ -209,7 +212,7 @@ class NewClientPage extends StatelessWidget {
                 formWidget: SollarisDropdown(
                   width: 18.2.w,
                   height: 40,
-                  valueSelected: ValueNotifier('Todos'),
+                  valueSelected: controller.stateNotifier,
                   values: const [
                     'Todos',
                     'AC',
@@ -249,7 +252,7 @@ class NewClientPage extends StatelessWidget {
                 formWidget: SollarisDropdown(
                   width: 18.2.w,
                   height: 40,
-                  valueSelected: ValueNotifier('Todas'),
+                  valueSelected: controller.cityNotifier,
                   values: const [
                     'Todas',
                     'Capital',
@@ -265,7 +268,7 @@ class NewClientPage extends StatelessWidget {
     );
   }
 
-  Widget _accessForm() {
+  Widget _accessForm(ClientPostController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -284,7 +287,7 @@ class NewClientPage extends StatelessWidget {
               formWidget: SolarisTextInput(
                 width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.emailotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -295,7 +298,7 @@ class NewClientPage extends StatelessWidget {
               formWidget: SolarisTextInput(
                 width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.cellphoneNotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -314,7 +317,7 @@ class NewClientPage extends StatelessWidget {
               formWidget: SolarisTextInput(
                 width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.passwordNotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -325,7 +328,7 @@ class NewClientPage extends StatelessWidget {
               formWidget: SolarisTextInput(
                 width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.confirmPasswordNotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -336,7 +339,7 @@ class NewClientPage extends StatelessWidget {
     );
   }
 
-  Widget _registerOrderButton() {
+  Widget _registerOrderButton(ClientPostController controller) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -345,7 +348,9 @@ class NewClientPage extends StatelessWidget {
           child: SollarisButton(
             height: 40,
             label: 'CADASTRAR CLIENTE',
-            onPressed: () {
+            onPressed: () async {
+              await controller.postClient();
+
               Get.find<NavigatorController>().setRoute('client_list_page');
             },
             buttonType: ButtonType.primaryButton,

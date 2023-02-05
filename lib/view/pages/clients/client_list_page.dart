@@ -1,27 +1,45 @@
+import 'package:sollaris_web_flutter/controller/clients/client_list_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/model/clients/client_model.dart';
 
-class ClientListPage extends StatelessWidget {
+class ClientListPage extends StatefulWidget {
   const ClientListPage({super.key});
 
   @override
+  State<ClientListPage> createState() => _ClientListPageState();
+}
+
+class _ClientListPageState extends State<ClientListPage> {
+  // @override
+  // void initState() {
+  //   Get.find()<ClientListController>();
+
+  //   super.initState();
+  // }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 76.w,
-      height: 100.h,
-      color: SollarisColors.neutral100,
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(70),
-          child: Column(
-            children: [
-              _titleSection(),
-              _filterSection(),
-              _contentSection(),
-            ],
-          ),
-        ),
-      ),
-    );
+    return GetBuilder<ClientListController>(
+        init: ClientListController(),
+        builder: (controller) {
+          return Container(
+            width: 76.w,
+            height: 100.h,
+            color: SollarisColors.neutral100,
+            child: SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.all(70),
+                child: Column(
+                  children: [
+                    _titleSection(),
+                    _filterSection(controller),
+                    _contentSection(controller),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 
   Widget _titleSection() {
@@ -56,7 +74,7 @@ class ClientListPage extends StatelessWidget {
     );
   }
 
-  Widget _filterSection() {
+  Widget _filterSection(ClientListController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -195,7 +213,7 @@ class ClientListPage extends StatelessWidget {
     );
   }
 
-  Widget _contentSection() {
+  Widget _contentSection(ClientListController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -211,7 +229,7 @@ class ClientListPage extends StatelessWidget {
       child: SollarisTable(
         tableWidth: 84.5.w,
         headerItems: _tableHeader(),
-        tableItems: _tableItems(),
+        tableItems: _tableItems(controller.clientList),
       ),
     );
   }
@@ -237,41 +255,19 @@ class ClientListPage extends StatelessWidget {
     ];
   }
 
-  List<List<Widget>> _tableItems() {
-    return [
-      [
+  List<List<Widget>> _tableItems(List<ClientModel> list) {
+    final items = <List<Widget>>[];
+
+    for (var count = 0; count < list.length; count++) {
+      final model = list[count];
+
+      items.add([
         TableItem(
-          content: TextButton(
-            child: const Text('#12345').main(SollarisColors.link100),
-            onPressed: () {
-              Get.find<NavigatorController>().setRoute('selected_client_page');
-            },
-          ),
-          position: Position.middle,
+          content: Text((count + 1).toString()).main(SollarisColors.neutral300),
+          position: count == list.length - 1 ? Position.fisrt : Position.middle,
         ),
         TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Pessoa física').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Campina Grande - PB').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
+          content: Text(model.nome.toString()).main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
@@ -280,50 +276,12 @@ class ClientListPage extends StatelessWidget {
         ),
         TableItem(
           content:
-              const Text('Campina Grande - PB').main(SollarisColors.neutral300),
-          position: Position.middle,
+              const Text('Campina Grande / PB').main(SollarisColors.neutral300),
+          position: count == list.length - 1 ? Position.last : Position.middle,
         ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Pessoa física').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Campina Grande - PB').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.fisrt,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Pessoa física').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Campina Grande - PB').main(SollarisColors.neutral300),
-          position: Position.last,
-        ),
-      ],
-    ];
+      ]);
+    }
+
+    return items;
   }
 }

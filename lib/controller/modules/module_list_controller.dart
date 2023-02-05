@@ -1,6 +1,14 @@
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/model/modules/export_module_models.dart';
+import 'package:sollaris_web_flutter/repository/modules/modules_repository.dart';
 
 class ModuleListController extends GetxController {
+  ModuleListController() {
+    loadModules();
+  }
+
+  final _repository = ModulesRepository();
+
   final modelFilterNotifier = TextEditingController();
   final providerFilterNotifier = ValueNotifier('Todos');
   final powerFilterNotifier = ValueNotifier('Todas');
@@ -8,10 +16,13 @@ class ModuleListController extends GetxController {
   List<String> providerList = <String>[];
   List<String> powerList = <String>[];
 
-  List<String> moduleList = <String>[];
+  List<ModuleModel> moduleList = <ModuleModel>[];
 
-  void init() {
-    
+  Future<void> loadModules() async {
+    final response = await _repository.getAllModules();
+    moduleList = List.from(response);
+
+    update();
   }
 
   void clearFilter() {
@@ -20,7 +31,5 @@ class ModuleListController extends GetxController {
     powerFilterNotifier.value = 'Todas';
   }
 
-  void applyFilter() {
-
-  }
+  void applyFilter() {}
 }
