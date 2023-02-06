@@ -76,7 +76,7 @@ class BudgetPostController extends GetxController {
       qtdModulos: double.tryParse(moduleQuantityItem.value),
       custo: totalCost,
       taxaDeRetorno: double.tryParse(returnRateItem.value.replaceAll('%', '')),
-      dataSolicitacao: '01/01/2023',
+      dataSolicitacao: '2023-02-05',
       nomeCliente: clientNotifier.value,
       pedidoGerado: false,
     );

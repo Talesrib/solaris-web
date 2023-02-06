@@ -1,18 +1,21 @@
 import 'package:sollaris_web_flutter/exports.dart';
 
 class SolarisTextInput extends StatelessWidget {
+
   const SolarisTextInput({
     super.key,
     required this.width,
     required this.height,
     required this.textEditingController,
     required this.hint,
+    this.enabled,
   });
 
   final double width;
   final double height;
   final TextEditingController textEditingController;
   final String hint;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,7 @@ class SolarisTextInput extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        enabled: enabled,
         cursorColor: SollarisColors.primary100,
         controller: textEditingController,
         style: GoogleFonts.montserrat(

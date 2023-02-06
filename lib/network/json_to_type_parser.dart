@@ -1,6 +1,7 @@
 import 'package:sollaris_web_flutter/model/budgets/budget_model.dart';
 import 'package:sollaris_web_flutter/model/clients/client_model.dart';
 import 'package:sollaris_web_flutter/model/modules/export_module_models.dart';
+import 'package:sollaris_web_flutter/model/orders/order_model.dart';
 
 typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
 
@@ -9,6 +10,7 @@ class JsonTypeParser {
     ModuleModel: ModuleModel.fromJsonFactory,
     ClientModel: ClientModel.fromJsonFactory,
     BudgetModel: BudgetModel.fromJsonFactory,
+    OrderModel: OrderModel.fromJsonFactory,
   };
 
   static dynamic decode<T>(dynamic entity) {

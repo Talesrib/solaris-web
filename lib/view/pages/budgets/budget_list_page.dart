@@ -1,4 +1,5 @@
 import 'package:sollaris_web_flutter/controller/budgets/budget_list_controller.dart';
+import 'package:sollaris_web_flutter/controller/budgets/selected_budget_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 import 'package:sollaris_web_flutter/model/budgets/budget_model.dart';
 
@@ -10,7 +11,6 @@ class BudgetListPage extends StatefulWidget {
 }
 
 class _BudgetListPageState extends State<BudgetListPage> {
-  
   @override
   void initState() {
     Get.find<BudgetListController>().loadBudgets();
@@ -211,11 +211,18 @@ class _BudgetListPageState extends State<BudgetListPage> {
 
       items.add([
         TableItem(
-          content: Text(model.id.toString()).main(SollarisColors.neutral300),
+          content: TextButton(
+              onPressed: () {
+                Get.find<NavigatorController>()
+                    .setRoute('selected_budget_page');
+                Get.find<SelectedBudgetController>().loadModel(model);
+              },
+              child: Text(model.id.toString()).main(SollarisColors.link100)),
           position: count == list.length - 1 ? Position.fisrt : Position.middle,
         ),
         TableItem(
-          content: Text(model.id.toString()).main(SollarisColors.neutral300),
+          content: Text(model.nomeCliente.toString())
+              .main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
@@ -224,7 +231,8 @@ class _BudgetListPageState extends State<BudgetListPage> {
           position: Position.middle,
         ),
         TableItem(
-          content: Text(model.custo.toString()).main(SollarisColors.neutral300),
+          content: Text('R\$ ${model.custo.toString()}')
+              .main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(

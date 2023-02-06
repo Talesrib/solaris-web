@@ -293,7 +293,7 @@ class _NewBudgetPageState extends State<NewBudgetPage> {
             onPressed: () {
               controller.postBudget();
 
-              Get.find<NavigatorController>().setRoute('selected_budget_page');
+              Get.find<NavigatorController>().setRoute('budget_list_page');
             },
             buttonType: ButtonType.primaryButton,
           ),

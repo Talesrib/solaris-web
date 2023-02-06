@@ -40,4 +40,20 @@ class _$BudgetService extends BudgetService {
     );
     return client.send<BudgetModel, BudgetModel>($request);
   }
+
+  @override
+  Future<Response<BudgetModel>> putBudget(
+    Map<String, dynamic> budgetPostBody,
+    double id,
+  ) {
+    final Uri $url = Uri.parse('/orcamento/${id}');
+    final $body = budgetPostBody;
+    final Request $request = Request(
+      'PUT',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<BudgetModel, BudgetModel>($request);
+  }
 }

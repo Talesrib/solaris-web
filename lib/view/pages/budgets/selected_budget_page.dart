@@ -1,29 +1,45 @@
+import 'package:sollaris_web_flutter/controller/budgets/selected_budget_controller.dart';
+import 'package:sollaris_web_flutter/controller/orders/order_post_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 
-class SelectedBudgetPage extends StatelessWidget {
+class SelectedBudgetPage extends StatefulWidget {
   const SelectedBudgetPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 76.w,
-      height: 100.h,
-      color: SollarisColors.neutral100,
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(70),
-          child: Column(
-            children: [
-              _titleSection(),
-              _contentSection(),
-            ],
-          ),
-        ),
-      ),
-    );
+  State<SelectedBudgetPage> createState() => _SelectedBudgetPageState();
+}
+
+class _SelectedBudgetPageState extends State<SelectedBudgetPage> {
+  @override
+  void initState() {
+    Get.find<SelectedBudgetController>().loadClients();
+
+    super.initState();
   }
 
-  Widget _titleSection() {
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<SelectedBudgetController>(builder: (controller) {
+      return Container(
+        width: 76.w,
+        height: 100.h,
+        color: SollarisColors.neutral100,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(70),
+            child: Column(
+              children: [
+                _titleSection(controller),
+                _contentSection(controller),
+              ],
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
+  Widget _titleSection(SelectedBudgetController controller) {
     return Container(
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.only(
@@ -38,7 +54,8 @@ class SelectedBudgetPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Text('ORÇAMENTO #12345').title(SollarisColors.neutral300),
+          Text('ORÇAMENTO #${controller.budgetId.toString()}')
+              .title(SollarisColors.neutral300),
           const Spacer(),
           const Padding(
             padding: EdgeInsets.only(left: 8),
@@ -51,7 +68,7 @@ class SelectedBudgetPage extends StatelessWidget {
     );
   }
 
-  Widget _contentSection() {
+  Widget _contentSection(SelectedBudgetController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -67,27 +84,27 @@ class SelectedBudgetPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _clientForm(),
-          _generateBudgetForms(),
-          _budgetTable(),
-          _registerBudgetButton(),
+          _clientForm(controller),
+          _generateBudgetForms(controller),
+          _budgetTable(controller),
+          _registerBudgetButton(controller),
         ],
       ),
     );
   }
 
-  Widget _clientForm() {
+  Widget _clientForm(SelectedBudgetController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SollarisForm(
           width: 28.w,
           title: 'Cliente',
-          formWidget: SolarisTextInput(
+          formWidget: SollarisDropdown(
             width: 28.w,
             height: 40,
-            textEditingController: TextEditingController(),
-            hint: '',
+            valueSelected: controller.clientNotifier,
+            values: controller.clientList,
           ),
           mandatory: false,
         ),
@@ -95,7 +112,7 @@ class SelectedBudgetPage extends StatelessWidget {
     );
   }
 
-  Widget _generateBudgetForms() {
+  Widget _generateBudgetForms(SelectedBudgetController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -114,7 +131,7 @@ class SelectedBudgetPage extends StatelessWidget {
               formWidget: SollarisDropdown(
                 width: 18.2.w,
                 height: 40,
-                valueSelected: ValueNotifier('Anual'),
+                valueSelected: controller.meanTypeNotifier,
                 values: const [
                   'Anual',
                   'Mensal',
@@ -128,7 +145,7 @@ class SelectedBudgetPage extends StatelessWidget {
               formWidget: SolarisTextInput(
                 width: 18.2.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.meanNotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -139,7 +156,7 @@ class SelectedBudgetPage extends StatelessWidget {
               formWidget: SollarisDropdown(
                 width: 28.w,
                 height: 40,
-                valueSelected: ValueNotifier('Monofásica'),
+                valueSelected: controller.phaseTypeNotifier,
                 values: const [
                   'Monofásica',
                   'Bifásica',
@@ -158,7 +175,9 @@ class SelectedBudgetPage extends StatelessWidget {
               SollarisButton(
                 height: 40,
                 label: 'CALCULAR',
-                onPressed: () {},
+                onPressed: () {
+                  controller.calculateBudget();
+                },
                 buttonType: ButtonType.primaryButton,
               ),
             ],
@@ -168,7 +187,7 @@ class SelectedBudgetPage extends StatelessWidget {
     );
   }
 
-  Widget _budgetTable() {
+  Widget _budgetTable(SelectedBudgetController controller) {
     return Padding(
       padding: const EdgeInsets.only(top: 48),
       child: Column(
@@ -177,20 +196,34 @@ class SelectedBudgetPage extends StatelessWidget {
           SollarisTable(
             tableWidth: 84.5.w,
             headerItems: _tableHeader(),
-            tableItems: _tableItems(),
+            tableItems: _tableItems(controller),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 36),
-            child: Row(
-              children: [
-                SollarisButton(
-                  height: 40,
-                  label: 'GRÁFICO DE GERAÇÃO',
-                  onPressed: () {},
-                  buttonType: ButtonType.secondaryButton,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 36),
+                child: Row(
+                  children: [
+                    SollarisButton(
+                      height: 40,
+                      label: 'GRÁFICO DE GERAÇÃO',
+                      onPressed: () {},
+                      buttonType: ButtonType.secondaryButton,
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  const Text('Custo total do projeto: ')
+                      .mainBold(SollarisColors.neutral300),
+                  Text('R\$ ${controller.totalCost.toString()}')
+                      .main(SollarisColors.error100)
+                ],
+              )
+            ],
           )
         ],
       ),
@@ -222,60 +255,72 @@ class SelectedBudgetPage extends StatelessWidget {
     ];
   }
 
-  List<List<Widget>> _tableItems() {
+  List<List<Widget>> _tableItems(SelectedBudgetController controller) {
     return [
       [
         TableItem(
-          content: const Text('12').main(SollarisColors.neutral300),
+          content: Text(controller.moduleQuantityItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.fisrt,
         ),
         TableItem(
-          content: const Text('120 kWh').main(SollarisColors.neutral300),
+          content: Text(controller.inverterPowerItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('40%').main(SollarisColors.neutral300),
+          content: Text(controller.returnRateItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('R\$ 1.200,00').main(SollarisColors.neutral300),
+          content: Text(controller.savingsMontlyItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('R\$ 24.400,00').main(SollarisColors.neutral300),
+          content: Text(controller.savingsAnualItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.last,
         ),
       ],
     ];
   }
 
-  Widget _registerBudgetButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        SollarisButton(
-          height: 40,
-          label: 'GERAR PEDIDO',
-          onPressed: () {
-            Get.find<NavigatorController>().setRoute('new_order_page');
-          },
-          buttonType: ButtonType.primaryButton,
-          iconData: Icons.add,
-          iconColor: SollarisColors.neutral0,
-          iconSize: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 24),
-          child: SollarisButton(
+  Widget _registerBudgetButton(SelectedBudgetController controller) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 36),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          SollarisButton(
             height: 40,
-            label: 'EDITAR ORÇAMENTO',
+            label: 'GERAR PEDIDO',
             onPressed: () {
-              Get.find<NavigatorController>().setRoute('budget_list_page');
+              Get.find<OrderPostController>().loadModel(controller.selectedModel);
+
+              Get.find<NavigatorController>().setRoute('new_order_page');
             },
             buttonType: ButtonType.primaryButton,
+            iconData: Icons.add,
+            iconColor: SollarisColors.neutral0,
+            iconSize: 20,
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(left: 24),
+            child: SollarisButton(
+              height: 40,
+              label: 'EDITAR ORÇAMENTO',
+              onPressed: () {
+                controller.putBudget();
+
+                Get.find<NavigatorController>().setRoute('budget_list_page');
+              },
+              buttonType: ButtonType.primaryButton,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -26,4 +26,10 @@ abstract class ClientService extends ChopperService {
   Future<Response<ClientModel>> postClient(
     @Body() Map<String, dynamic> clientPostBody,
   );
+
+  @Put(path: '/cliente/{id}')
+  Future<Response<ClientModel>> putClient(
+    @Body() Map<String, dynamic> clientPostBody,
+    @Path() double id,
+  );
 }

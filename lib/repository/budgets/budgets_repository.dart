@@ -23,4 +23,12 @@ class BudgetRepository {
       debugPrint(e.toString());
     }
   }
+
+  Future<void> putBudget(Map<String, dynamic> body, double id) async {
+    try {
+      await _clientService.putBudget(body, id);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

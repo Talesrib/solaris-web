@@ -23,4 +23,12 @@ class ClientRepository {
       debugPrint(e.toString());
     }
   }
+
+    Future<void> putClient(Map<String, dynamic> body, double id) async {
+    try {
+      await _clientService.putClient(body, id);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

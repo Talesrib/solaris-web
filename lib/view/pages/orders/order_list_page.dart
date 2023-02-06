@@ -1,27 +1,43 @@
+import 'package:sollaris_web_flutter/controller/orders/order_list_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/model/orders/order_model.dart';
 
-class OrderListPage extends StatelessWidget {
+class OrderListPage extends StatefulWidget {
   const OrderListPage({super.key});
 
   @override
+  State<OrderListPage> createState() => _OrderListPageState();
+}
+
+class _OrderListPageState extends State<OrderListPage> {
+  @override
+  void initState() {
+    Get.find<OrderListController>().loadOrders();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 76.w,
-      height: 100.h,
-      color: SollarisColors.neutral100,
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(70),
-          child: Column(
-            children: [
-              _titleSection(),
-              _filterSection(),
-              _contentSection(),
-            ],
+    return GetBuilder<OrderListController>(builder: (controller) {
+      return Container(
+        width: 76.w,
+        height: 100.h,
+        color: SollarisColors.neutral100,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(70),
+            child: Column(
+              children: [
+                _titleSection(),
+                _filterSection(),
+                _contentSection(controller),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _titleSection() {
@@ -138,7 +154,7 @@ class OrderListPage extends StatelessWidget {
     );
   }
 
-  Widget _contentSection() {
+  Widget _contentSection(OrderListController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -154,7 +170,7 @@ class OrderListPage extends StatelessWidget {
       child: SollarisTable(
         tableWidth: 84.5.w,
         headerItems: _tableHeader(),
-        tableItems: _tableItems(),
+        tableItems: _tableItems(controller.orderList),
       ),
     );
   }
@@ -184,143 +200,59 @@ class OrderListPage extends StatelessWidget {
     ];
   }
 
-  List<List<Widget>> _tableItems() {
-    return [
-      [
+  List<List<Widget>> _tableItems(List<OrderModel> list) {
+    final items = <List<Widget>>[];
+
+    for (var count = 0; count < list.length; count++) {
+      final model = list[count];
+
+      items.add([
         TableItem(
           content: TextButton(
-            child: const Text('#12345').main(SollarisColors.link100),
-            onPressed: () {
-              Get.find<NavigatorController>().setRoute('selected_order_page');
-            },
+              onPressed: () {
+                Get.find<NavigatorController>().setRoute('selected_order_page');
+                //Get.find<SelectedBudgetController>().loadModel(model);
+              },
+              child: Text(model.id.toString()).main(SollarisColors.link100)),
+          position: count == list.length - 1 ? Position.fisrt : Position.middle,
+        ),
+        TableItem(
+          content: Text(model.nomeCliente.toString())
+              .main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: Text(model.dataSolicitacao.toString())
+              .main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: Text('R\$ ${model.orcamentoId.toString()}')
+              .main(SollarisColors.neutral300),
+          position: Position.middle,
+        ),
+        TableItem(
+          content: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 5,
+              horizontal: 10,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: model.status.toString() == 'Cancelado'
+                  ? SollarisColors.error100
+                  : model.status.toString() == 'Confirmado'
+                      ? SollarisColors.success100
+                      : SollarisColors.neutral200,
+            ),
+            child: Text(model.status.toString().toUpperCase())
+                .main(SollarisColors.neutral0),
           ),
-          position: Position.middle,
+          position: count == list.length - 1 ? Position.last : Position.middle,
         ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        const TableItem(
-          content: StatusIndicator(
-            status: Status.finalizado,
-          ),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.link100),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        const TableItem(
-          content: StatusIndicator(
-            status: Status.finalizado,
-          ),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.link100),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        const TableItem(
-          content: StatusIndicator(
-            status: Status.emAnalise,
-          ),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.link100),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        const TableItem(
-          content: StatusIndicator(
-            status: Status.emAnalise,
-          ),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.link100),
-          position: Position.fisrt,
-        ),
-        TableItem(
-          content:
-              const Text('Cliente exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('12/12/2022 - 12:12').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('R\$ 1.234,00').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        const TableItem(
-          content: StatusIndicator(
-            status: Status.cancelado,
-          ),
-          position: Position.last,
-        ),
-      ],
-    ];
+      ]);
+    }
+
+    return items;
   }
 }

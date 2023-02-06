@@ -40,4 +40,20 @@ class _$ClientService extends ClientService {
     );
     return client.send<ClientModel, ClientModel>($request);
   }
+
+  @override
+  Future<Response<ClientModel>> putClient(
+    Map<String, dynamic> clientPostBody,
+    double id,
+  ) {
+    final Uri $url = Uri.parse('/cliente/${id}');
+    final $body = clientPostBody;
+    final Request $request = Request(
+      'PUT',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<ClientModel, ClientModel>($request);
+  }
 }

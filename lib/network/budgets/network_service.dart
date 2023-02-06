@@ -26,4 +26,10 @@ abstract class BudgetService extends ChopperService {
   Future<Response<BudgetModel>> postBudget(
     @Body() Map<String, dynamic> budgetPostBody,
   );
+
+  @Put(path: '/orcamento/{id}')
+  Future<Response<BudgetModel>> putBudget(
+    @Body() Map<String, dynamic> budgetPostBody,
+    @Path() double id,
+  );
 }

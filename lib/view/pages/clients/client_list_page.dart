@@ -1,4 +1,5 @@
 import 'package:sollaris_web_flutter/controller/clients/client_list_controller.dart';
+import 'package:sollaris_web_flutter/controller/clients/selected_client_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 import 'package:sollaris_web_flutter/model/clients/client_model.dart';
 
@@ -263,7 +264,13 @@ class _ClientListPageState extends State<ClientListPage> {
 
       items.add([
         TableItem(
-          content: Text(model.nome.toString()).main(SollarisColors.neutral300),
+          content: TextButton(
+              onPressed: () {
+                Get.find<NavigatorController>()
+                    .setRoute('selected_client_page');
+                Get.find<SelectedClientController>().loadModel(model);
+              },
+              child: Text(model.nome.toString()).main(SollarisColors.link100)),
           position: count == list.length - 1 ? Position.fisrt : Position.middle,
         ),
         TableItem(
