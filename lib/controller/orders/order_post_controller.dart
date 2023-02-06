@@ -1,5 +1,6 @@
 import 'package:sollaris_web_flutter/exports.dart';
 import 'package:sollaris_web_flutter/model/budgets/budget_model.dart';
+import 'package:sollaris_web_flutter/model/orders/order_model.dart';
 import 'package:sollaris_web_flutter/repository/clients/clients_repository.dart';
 import 'package:sollaris_web_flutter/repository/orders/orders_repository.dart';
 
@@ -49,10 +50,10 @@ class OrderPostController extends GetxController {
     update();
   }
 
-  // Post Budget Method
+  // Post Order Method
 
-  Future<void> postBudget() async {
-    final body = BudgetModel(
+  Future<void> postOrder() async {
+    final body = OrderModel(
       id: 0,
       tipoMedia: meanTypeNotifier.value,
       mediaConsumo: double.tryParse(meanNotifier.text),
@@ -64,11 +65,12 @@ class OrderPostController extends GetxController {
       potenciaInversor:
           double.tryParse(inverterPowerItem.value.replaceAll(' kWh', '')),
       qtdModulos: double.tryParse(moduleQuantityItem.value),
-      custo: totalCost,
+      custoTotal: totalCost,
       taxaDeRetorno: double.tryParse(returnRateItem.value.replaceAll('%', '')),
       dataSolicitacao: '2023-02-05',
       nomeCliente: clientNotifier.value,
-      pedidoGerado: false,
+      orcamentoId: double.tryParse(budgetIdNotifier.text),
+      status: 'Em análise',
     );
 
     await _repository.postOrder(body.toJson());

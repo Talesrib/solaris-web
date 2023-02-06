@@ -315,6 +315,8 @@ class NewOrderPage extends StatelessWidget {
             height: 40,
             label: 'GERAR PEDIDO',
             onPressed: () {
+              controller.postOrder();
+
               Get.find<NavigatorController>().setRoute('order_list_page');
             },
             buttonType: ButtonType.primaryButton,
