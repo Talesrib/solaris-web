@@ -118,6 +118,10 @@ flutter_svg
 2.17
 file:///Users/ronaldoolenhador/.pub-cache/hosted/pub.dev/flutter_svg-1.1.6/
 file:///Users/ronaldoolenhador/.pub-cache/hosted/pub.dev/flutter_svg-1.1.6/lib/
+fluttertoast
+2.12
+file:///Users/ronaldoolenhador/.pub-cache/hosted/pub.dev/fluttertoast-8.1.2/
+file:///Users/ronaldoolenhador/.pub-cache/hosted/pub.dev/fluttertoast-8.1.2/lib/
 frontend_server_client
 2.12
 file:///Users/ronaldoolenhador/.pub-cache/hosted/pub.dev/frontend_server_client-3.2.0/
@@ -362,6 +366,10 @@ flutter_test
 2.17
 file:///Users/ronaldoolenhador/Development/flutter/packages/flutter_test/
 file:///Users/ronaldoolenhador/Development/flutter/packages/flutter_test/lib/
+flutter_web_plugins
+2.17
+file:///Users/ronaldoolenhador/Development/flutter/packages/flutter_web_plugins/
+file:///Users/ronaldoolenhador/Development/flutter/packages/flutter_web_plugins/lib/
 sollaris_web_flutter
 2.18
 file:///Users/ronaldoolenhador/solaris-web/

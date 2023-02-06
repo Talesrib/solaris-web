@@ -194,6 +194,18 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///Users/ronaldoolenhador/Development/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "fluttertoast",
+      "rootUri": "file:///Users/ronaldoolenhador/.pub-cache/hosted/pub.dev/fluttertoast-8.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "frontend_server_client",
       "rootUri": "file:///Users/ronaldoolenhador/.pub-cache/hosted/pub.dev/frontend_server_client-3.2.0",
       "packageUri": "lib/",
@@ -554,7 +566,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-02-04T15:42:38.596596Z",
+  "generated": "2023-02-06T11:24:50.605244Z",
   "generator": "pub",
   "generatorVersion": "2.19.0"
 }

@@ -1,6 +1,7 @@
 import 'package:sollaris_web_flutter/controller/budgets/budget_post_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 import 'package:sollaris_web_flutter/view/components/dialog.dart';
+import 'package:sollaris_web_flutter/view/components/display_toast.dart';
 
 class NewBudgetPage extends StatefulWidget {
   const NewBudgetPage({super.key});
@@ -296,12 +297,11 @@ class _NewBudgetPageState extends State<NewBudgetPage> {
                 context,
                 () {
                   controller.postBudget();
+
                   Get.find<NavigatorController>().setRoute('budget_list_page');
                 },
                 'Você tem certeza que deseja\ngerar um orçamento?',
               );
-
-              
             },
             buttonType: ButtonType.primaryButton,
           ),

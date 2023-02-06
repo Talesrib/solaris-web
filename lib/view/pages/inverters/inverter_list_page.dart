@@ -1,27 +1,44 @@
+import 'package:sollaris_web_flutter/controller/inverters/inverter_list_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/model/inverters/inverter_model.dart';
 
-class InverterListPage extends StatelessWidget {
+class InverterListPage extends StatefulWidget {
   const InverterListPage({super.key});
 
   @override
+  State<InverterListPage> createState() => _InverterListPageState();
+}
+
+class _InverterListPageState extends State<InverterListPage> {
+
+  @override
+  void initState() {
+    Get.find<InverterListController>().loadInverter();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 76.w,
-      height: 100.h,
-      color: SollarisColors.neutral100,
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(70),
-          child: Column(
-            children: [
-              _titleSection(),
-              _filterSection(),
-              _contentSection(),
-            ],
+    return GetBuilder<InverterListController>(builder: (controller) {
+      return Container(
+        width: 76.w,
+        height: 100.h,
+        color: SollarisColors.neutral100,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(70),
+            child: Column(
+              children: [
+                _titleSection(),
+                _filterSection(controller),
+                _contentSection(controller),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _titleSection() {
@@ -34,11 +51,11 @@ class InverterListPage extends StatelessWidget {
       decoration: const BoxDecoration(
           color: SollarisColors.neutral0,
           borderRadius: BorderRadius.all(Radius.circular(15))),
-      child: const Text('INVERSORES').title(SollarisColors.neutral300),
+      child: const Text('MÓDULOS').title(SollarisColors.neutral300),
     );
   }
 
-  Widget _filterSection() {
+  Widget _filterSection(InverterListController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -53,17 +70,17 @@ class InverterListPage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _filterFields(),
+          _filterFields(controller),
           Padding(
             padding: const EdgeInsets.only(top: 24),
-            child: _filterButtons(),
+            child: _filterButtons(controller),
           )
         ],
       ),
     );
   }
 
-  Widget _filterFields() {
+  Widget _filterFields(InverterListController controller) {
     return SizedBox(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,7 +91,7 @@ class InverterListPage extends StatelessWidget {
             formWidget: SolarisTextInput(
               width: 18.2.w,
               height: 40,
-              textEditingController: TextEditingController(),
+              textEditingController: controller.modelFilterNotifier,
               hint: '',
             ),
             mandatory: false,
@@ -85,9 +102,10 @@ class InverterListPage extends StatelessWidget {
             formWidget: SollarisDropdown(
               width: 18.2.w,
               height: 40,
-              valueSelected: ValueNotifier('Nenhum'),
+              valueSelected: controller.providerFilterNotifier,
               values: const [
                 'Nenhum',
+                'Todos',
               ],
             ),
             mandatory: false,
@@ -98,9 +116,10 @@ class InverterListPage extends StatelessWidget {
             formWidget: SollarisDropdown(
               width: 18.2.w,
               height: 40,
-              valueSelected: ValueNotifier('0 kW'),
+              valueSelected: controller.powerFilterNotifier,
               values: const [
-                '0 kW',
+                '0 W',
+                'Todas',
               ],
             ),
             mandatory: false,
@@ -110,7 +129,7 @@ class InverterListPage extends StatelessWidget {
     );
   }
 
-  Widget _filterButtons() {
+  Widget _filterButtons(InverterListController controller) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -119,21 +138,25 @@ class InverterListPage extends StatelessWidget {
           child: SollarisButton(
             height: 40,
             label: 'LIMPAR',
-            onPressed: () {},
+            onPressed: () {
+              controller.clearFilter();
+            },
             buttonType: ButtonType.secondaryButton,
           ),
         ),
         SollarisButton(
           height: 40,
           label: 'APLICAR',
-          onPressed: () {},
+          onPressed: () {
+            controller.loadInverter();
+          },
           buttonType: ButtonType.primaryButton,
         ),
       ],
     );
   }
 
-  Widget _contentSection() {
+  Widget _contentSection(InverterListController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -149,7 +172,7 @@ class InverterListPage extends StatelessWidget {
       child: SollarisTable(
         tableWidth: 84.5.w,
         headerItems: _tableHeader(),
-        tableItems: _tableItems(),
+        tableItems: _tableItems(controller.inverterList),
       ),
     );
   }
@@ -175,84 +198,34 @@ class InverterListPage extends StatelessWidget {
     ];
   }
 
-  List<List<Widget>> _tableItems() {
-    return [
-      [
+  List<List<Widget>> _tableItems(List<InverterModel> list) {
+    final items = <List<Widget>>[];
+
+    for (var count = 0; count < list.length; count++) {
+      final model = list[count];
+
+      items.add([
         TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
+          content: Text(model.id.toString()).main(SollarisColors.neutral300),
+          position: count == list.length - 1 ? Position.fisrt : Position.middle,
         ),
         TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
+          content:
+              Text(model.modelo.toString()).main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
           content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
+              Text(model.fabricante.toString()).main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('12345 kW').main(SollarisColors.neutral300),
-          position: Position.middle,
+          content: Text('${model.potencia} kW').main(SollarisColors.neutral300),
+          position: count == list.length - 1 ? Position.last : Position.middle,
         ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 kW').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 kW').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-      ],
-      [
-        TableItem(
-          content: const Text('#12345').main(SollarisColors.neutral300),
-          position: Position.fisrt,
-        ),
-        TableItem(
-          content: const Text('Modelo exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content:
-              const Text('Fabricante exemplo').main(SollarisColors.neutral300),
-          position: Position.middle,
-        ),
-        TableItem(
-          content: const Text('12345 kW').main(SollarisColors.neutral300),
-          position: Position.last,
-        ),
-      ]
-    ];
+      ]);
+    }
+
+    return items;
   }
 }
