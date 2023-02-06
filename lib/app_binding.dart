@@ -6,6 +6,7 @@ import 'package:sollaris_web_flutter/controller/clients/client_post_controller.d
 import 'package:sollaris_web_flutter/controller/clients/selected_client_controller.dart';
 import 'package:sollaris_web_flutter/controller/orders/order_list_controller.dart';
 import 'package:sollaris_web_flutter/controller/orders/order_post_controller.dart';
+import 'package:sollaris_web_flutter/controller/orders/selected_order_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 
 class AppBinding extends Bindings {
@@ -25,5 +26,6 @@ class AppBinding extends Bindings {
 
     Get.put<OrderListController>(OrderListController());
     Get.put<OrderPostController>(OrderPostController());
+    Get.put<SelectedOrderController>(SelectedOrderController());
   }
 }

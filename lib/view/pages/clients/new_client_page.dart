@@ -1,9 +1,15 @@
 import 'package:sollaris_web_flutter/controller/clients/client_post_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/view/components/dialog.dart';
 
-class NewClientPage extends StatelessWidget {
+class NewClientPage extends StatefulWidget {
   const NewClientPage({super.key});
 
+  @override
+  State<NewClientPage> createState() => _NewClientPageState();
+}
+
+class _NewClientPageState extends State<NewClientPage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ClientPostController>(builder: (controller) {
@@ -354,9 +360,16 @@ class NewClientPage extends StatelessWidget {
             height: 40,
             label: 'CADASTRAR CLIENTE',
             onPressed: () async {
-              await controller.postClient();
+              await dialog(
+                context,
+                () {
+                  controller.postClient();
+                  Get.find<NavigatorController>().setRoute('client_list_page');
+                },
+                'Você tem certeza que deseja\ncadastrar um cliente?',
+              );
 
-              Get.find<NavigatorController>().setRoute('client_list_page');
+              
             },
             buttonType: ButtonType.primaryButton,
           ),

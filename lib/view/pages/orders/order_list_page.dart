@@ -1,4 +1,5 @@
 import 'package:sollaris_web_flutter/controller/orders/order_list_controller.dart';
+import 'package:sollaris_web_flutter/controller/orders/selected_order_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 import 'package:sollaris_web_flutter/model/orders/order_model.dart';
 
@@ -211,7 +212,7 @@ class _OrderListPageState extends State<OrderListPage> {
           content: TextButton(
               onPressed: () {
                 Get.find<NavigatorController>().setRoute('selected_order_page');
-                //Get.find<SelectedBudgetController>().loadModel(model);
+                Get.find<SelectedOrderController>().loadModel(model);
               },
               child: Text(model.id.toString()).main(SollarisColors.link100)),
           position: count == list.length - 1 ? Position.fisrt : Position.middle,
@@ -227,7 +228,7 @@ class _OrderListPageState extends State<OrderListPage> {
           position: Position.middle,
         ),
         TableItem(
-          content: Text('R\$ ${model.orcamentoId.toString()}')
+          content: Text('R\$ ${model.custoTotal.toString()}')
               .main(SollarisColors.neutral300),
           position: Position.middle,
         ),

@@ -1,9 +1,15 @@
 import 'package:sollaris_web_flutter/controller/orders/order_post_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/view/components/dialog.dart';
 
-class NewOrderPage extends StatelessWidget {
+class NewOrderPage extends StatefulWidget {
   const NewOrderPage({super.key});
 
+  @override
+  State<NewOrderPage> createState() => _NewOrderPageState();
+}
+
+class _NewOrderPageState extends State<NewOrderPage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OrderPostController>(builder: (controller) {
@@ -314,10 +320,17 @@ class NewOrderPage extends StatelessWidget {
           child: SollarisButton(
             height: 40,
             label: 'GERAR PEDIDO',
-            onPressed: () {
-              controller.postOrder();
+            onPressed: () async {
+              await dialog(
+                context,
+                () {
+                  controller.postOrder();
+                  Get.find<NavigatorController>().setRoute('order_list_page');
+                },
+                'Você tem certeza que deseja\ngerar um pedido?',
+              );
 
-              Get.find<NavigatorController>().setRoute('order_list_page');
+              
             },
             buttonType: ButtonType.primaryButton,
           ),

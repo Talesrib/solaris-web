@@ -1,3 +1,4 @@
+import 'package:sollaris_web_flutter/controller/orders/selected_order_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
 
 class SelectedOrderPage extends StatelessWidget {
@@ -5,25 +6,27 @@ class SelectedOrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 76.w,
-      height: 100.h,
-      color: SollarisColors.neutral100,
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(70),
-          child: Column(
-            children: [
-              _titleSection(),
-              _contentSection(),
-            ],
+    return GetBuilder<SelectedOrderController>(builder: (controller) {
+      return Container(
+        width: 76.w,
+        height: 100.h,
+        color: SollarisColors.neutral100,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(70),
+            child: Column(
+              children: [
+                _titleSection(controller),
+                _contentSection(controller),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
-  Widget _titleSection() {
+  Widget _titleSection(SelectedOrderController controller) {
     return Container(
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.only(
@@ -38,7 +41,8 @@ class SelectedOrderPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('PEDIDO #12345').title(SollarisColors.neutral300),
+          Text('PEDIDO #${controller.selectedModel.id}')
+              .title(SollarisColors.neutral300),
           const SollarisBackButton(
             route: 'order_list_page',
           ),
@@ -47,7 +51,7 @@ class SelectedOrderPage extends StatelessWidget {
     );
   }
 
-  Widget _contentSection() {
+  Widget _contentSection(SelectedOrderController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 48),
       padding: const EdgeInsets.symmetric(
@@ -63,34 +67,62 @@ class SelectedOrderPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _clientForm(),
-          _generateBudgetForms(),
-          _budgetTable(),
+          _clientForm(controller),
+          _generateBudgetForms(controller),
+          _budgetTable(controller),
         ],
       ),
     );
   }
 
-  Widget _clientForm() {
+  Widget _clientForm(SelectedOrderController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SollarisForm(
-          width: 28.w,
-          title: 'Cliente',
-          formWidget: SolarisTextInput(
-            width: 28.w,
-            height: 40,
-            textEditingController: TextEditingController(),
-            hint: '',
-          ),
-          mandatory: false,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SollarisForm(
+              width: 28.w,
+              title: 'Cliente',
+              formWidget: SollarisDropdown(
+                width: 28.w,
+                height: 40,
+                valueSelected: controller.clientNotifier,
+                values: [controller.clientNotifier.value],
+                mutable: false,
+              ),
+              mandatory: false,
+            ),
+            Row(
+              children: [
+                const Text('Status do pedido: ')
+                    .mainBold(SollarisColors.neutral300),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 5,
+                    horizontal: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: controller.statusNotifier.value == 'Cancelado'
+                        ? SollarisColors.error100
+                        : controller.statusNotifier.value == 'Confirmado'
+                            ? SollarisColors.success100
+                            : SollarisColors.neutral200,
+                  ),
+                  child: Text(controller.statusNotifier.value.toUpperCase())
+                      .main(SollarisColors.neutral0),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );
   }
 
-  Widget _generateBudgetForms() {
+  Widget _generateBudgetForms(SelectedOrderController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -106,11 +138,15 @@ class SelectedOrderPage extends StatelessWidget {
             SollarisForm(
               width: 18.2.w,
               title: 'Tipo da média de consumo',
-              formWidget: SolarisTextInput(
+              formWidget: SollarisDropdown(
                 width: 18.2.w,
                 height: 40,
-                textEditingController: TextEditingController(),
-                hint: '',
+                valueSelected: controller.meanTypeNotifier,
+                values: const [
+                  'Anual',
+                  'Mensal',
+                ],
+                mutable: false,
               ),
               mandatory: false,
             ),
@@ -118,9 +154,10 @@ class SelectedOrderPage extends StatelessWidget {
               width: 18.2.w,
               title: 'Média de consumo',
               formWidget: SolarisTextInput(
+                enabled: false,
                 width: 18.2.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.meanNotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -128,11 +165,16 @@ class SelectedOrderPage extends StatelessWidget {
             SollarisForm(
               width: 18.2.w,
               title: 'Tipo de fase',
-              formWidget: SolarisTextInput(
+              formWidget: SollarisDropdown(
                 width: 18.2.w,
                 height: 40,
-                textEditingController: TextEditingController(),
-                hint: '',
+                valueSelected: controller.phaseTypeNotifier,
+                values: const [
+                  'Monofásica',
+                  'Bifásica',
+                  'Trifásica',
+                ],
+                mutable: false,
               ),
               mandatory: false,
             ),
@@ -151,9 +193,10 @@ class SelectedOrderPage extends StatelessWidget {
               width: 28.w,
               title: 'Nº do orçamento',
               formWidget: SolarisTextInput(
+                enabled: false,
                 width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.budgetIdNotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -162,9 +205,10 @@ class SelectedOrderPage extends StatelessWidget {
               width: 28.w,
               title: 'Data do orçamento',
               formWidget: SolarisTextInput(
+                enabled: false,
                 width: 28.w,
                 height: 40,
-                textEditingController: TextEditingController(),
+                textEditingController: controller.budgetDateNotifier,
                 hint: '',
               ),
               mandatory: false,
@@ -181,37 +225,51 @@ class SelectedOrderPage extends StatelessWidget {
     );
   }
 
-  Widget _budgetTable() {
+  Widget _budgetTable(SelectedOrderController controller) {
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-              bottom: 12
-            ),
+            padding: const EdgeInsets.only(bottom: 12),
             child: const Text('Dados do orçamento')
                 .mainBold(SollarisColors.neutral300),
           ),
           SollarisTable(
             tableWidth: 84.5.w,
             headerItems: _tableHeader(),
-            tableItems: _tableItems(),
+            tableItems: _tableItems(controller),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 36),
-            child: Row(
-              children: [
-                SollarisButton(
-                  height: 40,
-                  label: 'GRÁFICO DE GERAÇÃO',
-                  onPressed: () {},
-                  buttonType: ButtonType.secondaryButton,
-                ),
-              ],
-            ),
-          )
+              padding: const EdgeInsets.only(top: 36),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 36),
+                    child: Row(
+                      children: [
+                        SollarisButton(
+                          height: 40,
+                          label: 'GRÁFICO DE GERAÇÃO',
+                          onPressed: () {},
+                          buttonType: ButtonType.secondaryButton,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  Row(
+                    children: [
+                      const Text('Custo total do projeto: ')
+                          .mainBold(SollarisColors.neutral300),
+                      Text('R\$ ${controller.totalCost.toString()}')
+                          .main(SollarisColors.error100)
+                    ],
+                  )
+                ],
+              ))
         ],
       ),
     );
@@ -242,27 +300,32 @@ class SelectedOrderPage extends StatelessWidget {
     ];
   }
 
-  List<List<Widget>> _tableItems() {
+  List<List<Widget>> _tableItems(SelectedOrderController controller) {
     return [
       [
         TableItem(
-          content: const Text('12').main(SollarisColors.neutral300),
+          content: Text(controller.moduleQuantityItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.fisrt,
         ),
         TableItem(
-          content: const Text('120 kWh').main(SollarisColors.neutral300),
+          content: Text(controller.inverterPowerItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('40%').main(SollarisColors.neutral300),
+          content: Text(controller.returnRateItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('R\$ 1.200,00').main(SollarisColors.neutral300),
+          content: Text(controller.savingsMontlyItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.middle,
         ),
         TableItem(
-          content: const Text('R\$ 24.400,00').main(SollarisColors.neutral300),
+          content: Text(controller.savingsAnualItem.value)
+              .main(SollarisColors.neutral300),
           position: Position.last,
         ),
       ],

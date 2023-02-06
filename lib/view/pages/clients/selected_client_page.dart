@@ -1,9 +1,15 @@
 import 'package:sollaris_web_flutter/controller/clients/selected_client_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/view/components/dialog.dart';
 
-class SelectedClientPage extends StatelessWidget {
+class SelectedClientPage extends StatefulWidget {
   const SelectedClientPage({super.key});
 
+  @override
+  State<SelectedClientPage> createState() => _SelectedClientPageState();
+}
+
+class _SelectedClientPageState extends State<SelectedClientPage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SelectedClientController>(builder: (controller) {
@@ -349,10 +355,17 @@ class SelectedClientPage extends StatelessWidget {
           child: SollarisButton(
             height: 40,
             label: 'EDITAR CLIENTE',
-            onPressed: () {
-              controller.putClient();
+            onPressed: () async {
+              await dialog(
+                context,
+                () {
+                  controller.putClient();
+                  Get.find<NavigatorController>().setRoute('client_list_page');
+                },
+                'Você tem certeza que deseja\neditar este cliente?',
+              );
 
-              Get.find<NavigatorController>().setRoute('client_list_page');
+              
             },
             buttonType: ButtonType.primaryButton,
           ),

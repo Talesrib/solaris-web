@@ -1,6 +1,7 @@
 import 'package:sollaris_web_flutter/controller/budgets/selected_budget_controller.dart';
 import 'package:sollaris_web_flutter/controller/orders/order_post_controller.dart';
 import 'package:sollaris_web_flutter/exports.dart';
+import 'package:sollaris_web_flutter/view/components/dialog.dart';
 
 class SelectedBudgetPage extends StatefulWidget {
   const SelectedBudgetPage({super.key});
@@ -200,6 +201,7 @@ class _SelectedBudgetPageState extends State<SelectedBudgetPage> {
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 36),
@@ -214,7 +216,6 @@ class _SelectedBudgetPageState extends State<SelectedBudgetPage> {
                   ],
                 ),
               ),
-              const Spacer(),
               Row(
                 children: [
                   const Text('Custo total do projeto: ')
@@ -296,10 +297,18 @@ class _SelectedBudgetPageState extends State<SelectedBudgetPage> {
           SollarisButton(
             height: 40,
             label: 'GERAR PEDIDO',
-            onPressed: () {
-              Get.find<OrderPostController>().loadModel(controller.selectedModel);
+            onPressed: () async {
+              await dialog(
+                context,
+                () {
+                  Get.find<OrderPostController>()
+                      .loadModel(controller.selectedModel);
+                  Get.find<NavigatorController>().setRoute('new_order_page');
+                },
+                'Você tem certeza que deseja\ngerar um pedido?',
+              );
 
-              Get.find<NavigatorController>().setRoute('new_order_page');
+              
             },
             buttonType: ButtonType.primaryButton,
             iconData: Icons.add,
@@ -311,10 +320,17 @@ class _SelectedBudgetPageState extends State<SelectedBudgetPage> {
             child: SollarisButton(
               height: 40,
               label: 'EDITAR ORÇAMENTO',
-              onPressed: () {
-                controller.putBudget();
+              onPressed: () async {
+                await dialog(
+                  context,
+                  () {
+                    controller.putBudget();
+                    Get.find<NavigatorController>().setRoute('budget_list_page');
+                  },
+                  'Você tem certeza que deseja\neditar este orçamento?',
+                );
 
-                Get.find<NavigatorController>().setRoute('budget_list_page');
+                
               },
               buttonType: ButtonType.primaryButton,
             ),
